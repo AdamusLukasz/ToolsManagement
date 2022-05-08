@@ -14,6 +14,7 @@ namespace ToolsManagement.Services
 
         int Create(CreateEndMillCutterDto dto);
         void Delete(int id);
+        void Update(int id, UpdateEndMillCutterDto dto);
     }
     public class EndMillCutterService : IEndMillCutterService
     {
@@ -77,6 +78,23 @@ namespace ToolsManagement.Services
                 throw new NotFoundException("EndMillCutter not found.");
             }
             _dbcontext.EndMillCutters.Remove(endMillCutter);
+            _dbcontext.SaveChanges();
+        }
+        public void Update(int id, UpdateEndMillCutterDto dto)
+        {
+            var endMillCutter = _dbcontext
+                .EndMillCutters
+                .FirstOrDefault(e => e.Id == id);
+            if (endMillCutter is null)
+            {
+                throw new NotFoundException("End Mill Cutter not found.");
+            }
+            endMillCutter.Name = dto.Name;
+            endMillCutter.Diameter = dto.Diameter;
+            endMillCutter.Vc = dto.Vc;
+            endMillCutter.Fz = dto.Fz;
+            endMillCutter.NumberOfTeeth = dto.NumberOfTeeth;
+            endMillCutter.WorkingLength = dto.WorkingLength;
             _dbcontext.SaveChanges();
         }
     }

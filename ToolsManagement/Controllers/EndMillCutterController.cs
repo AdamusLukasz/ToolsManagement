@@ -34,5 +34,18 @@ namespace ToolsManagement.Controllers
             var id = _endMillCutterService.Create(dto);
             return Created($"/api/endmillcutter/{id}", null);
         }
+        [HttpDelete("{id}")]
+        public ActionResult Delete([FromRoute] int id)
+        {
+            _endMillCutterService.Delete(id);
+            return NoContent();
+        }
+        [HttpPut("{id}")]
+        public ActionResult Update([FromBody] UpdateEndMillCutterDto dto, [FromRoute] int id)
+        {
+            _endMillCutterService.Update(id, dto);
+            return Ok();
+        }
+
     }
 }

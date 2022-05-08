@@ -13,6 +13,7 @@ namespace ToolsManagement.Services
         int Create(CreateDrillDto dto);
         DrillDto GetById(int id);
         void Delete(int id);
+        void Update(int id, UpdateDrillDto dto);
     }
     public class DrillService : IDrillService
     {
@@ -68,6 +69,21 @@ namespace ToolsManagement.Services
                 throw new NotFoundException("Drill not found.");
             }
             _dbContext.Drills.Remove(drill);
+            _dbContext.SaveChanges();
+        }
+        public void Update(int id, UpdateDrillDto dto)
+        {
+            var drill = _dbContext
+                .Drills
+                .FirstOrDefault(d => d.Id == id);
+            if (drill is null)
+            {
+                throw new NotFoundException("Drill not found.");
+            }
+            drill.Name = dto.Name;
+            drill.Diameter = dto.Diameter;
+            drill.Vc = dto.Vc;
+            drill.Fz = dto.Fz;
             _dbContext.SaveChanges();
         }
     }

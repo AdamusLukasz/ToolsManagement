@@ -43,7 +43,12 @@ namespace ToolsManagement.Controllers
             _drillService.Delete(id);
             return NoContent();
         }
-
+        [HttpPut("{id}")]
+        public ActionResult Update([FromBody] UpdateDrillDto dto, [FromRoute] int id)
+        {
+            _drillService.Update(id, dto);
+            return Ok();
+        }
 
 
     }
