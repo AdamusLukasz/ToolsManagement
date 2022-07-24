@@ -31,10 +31,10 @@ namespace ToolsManagement.Services
                 Id = x.Id,
                 Name = x.Name,
                 Diameter = x.Diameter,
-                Vc = x.Vc,
-                Fz = x.Fz,
-                NumberOfTeeth = x.NumberOfTeeth,
-                WorkingLength = x.WorkingLength
+                //Vc = x.Vc,
+                //Fz = x.Fz,
+                //NumberOfTeeth = x.NumberOfTeeth,
+                //WorkingLength = x.WorkingLength
             }).
             ToList();
             return endMillCutter;
@@ -44,7 +44,7 @@ namespace ToolsManagement.Services
             var endMillCutter = _dbcontext
                 .EndMillCutters
                 .Select(x => new EndMillCutterDto()
-                { Name = x.Name, Diameter = x.Diameter, Fz = x.Fz, Vc = x.Vc, NumberOfTeeth = x.NumberOfTeeth, WorkingLength = x.WorkingLength })
+                { Name = x.Name, Diameter = x.Diameter, /*Fz = x.Fz, Vc = x.Vc, NumberOfTeeth = x.NumberOfTeeth, WorkingLength = x.WorkingLength*/ })
                 .FirstOrDefault(e => e.Id == id);
             if (endMillCutter is null)
             {
@@ -58,10 +58,10 @@ namespace ToolsManagement.Services
             {
                 Name = dto.Name,
                 Diameter = dto.Diameter,
-                Vc = dto.Vc,
-                Fz = dto.Fz,
-                NumberOfTeeth = dto.NumberOfTeeth,
-                WorkingLength = dto.WorkingLength
+                //Vc = dto.Vc,
+                //Fz = dto.Fz,
+                //NumberOfTeeth = dto.NumberOfTeeth,
+                //WorkingLength = dto.WorkingLength
             };
 
             _dbcontext.EndMillCutters.Add(endMillCutter);
@@ -91,10 +91,10 @@ namespace ToolsManagement.Services
             }
             endMillCutter.Name = dto.Name;
             endMillCutter.Diameter = dto.Diameter;
-            endMillCutter.Vc = dto.Vc;
-            endMillCutter.Fz = dto.Fz;
-            endMillCutter.NumberOfTeeth = dto.NumberOfTeeth;
-            endMillCutter.WorkingLength = dto.WorkingLength;
+            //endMillCutter.Vc = dto.Vc;
+            //endMillCutter.Fz = dto.Fz;
+            //endMillCutter.NumberOfTeeth = dto.NumberOfTeeth;
+            //endMillCutter.WorkingLength = dto.WorkingLength;
             _dbcontext.SaveChanges();
         }
     }

@@ -4,14 +4,10 @@ namespace ToolsManagement.Models
 {
     public class CreateDrillDto
     {
-        [Required]
-        [MaxLength(40)]
+        public int Id { get; set; }
         public string Name { get; set; }
-        [Required]
         public double Diameter { get; set; }
-        [Required]
         public int Vc { get; set; }
-        [Required]
         public double Fz { get; set; }
     }
 }

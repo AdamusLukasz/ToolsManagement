@@ -29,7 +29,7 @@ namespace ToolsManagement.Services
             var drills = _dbContext
                 .Drills
                 .Select(x => new DrillDto()
-                { Id = x.Id, Name = x.Name, Diameter = x.Diameter, Vc = x.Vc, Fz = x.Fz})
+                { Id = x.Id, Name = x.Name, Diameter = x.Diameter, /*Vc = x.Vc, Fz = x.Fz*/})
                 .ToList();
             return drills;
         }
@@ -39,8 +39,8 @@ namespace ToolsManagement.Services
             {
                 Name = dto.Name,
                 Diameter = dto.Diameter, 
-                Fz = dto.Fz, 
-                Vc = dto.Vc
+                //Fz = dto.Fz, 
+                //Vc = dto.Vc
             };
             _dbContext.Add(drill);
             _dbContext.SaveChanges();
@@ -51,7 +51,7 @@ namespace ToolsManagement.Services
             var drill = _dbContext
                 .Drills
                 .Select(x => new DrillDto()
-                { Id = x.Id, Name = x.Name, Diameter = x.Diameter, Vc = x.Vc, Fz = x.Fz })
+                { Id = x.Id, Name = x.Name, Diameter = x.Diameter, /*Vc = x.Vc, Fz = x.Fz */})
                 .FirstOrDefault(d => d.Id == id);
             if (drill is null)
             {
@@ -82,8 +82,8 @@ namespace ToolsManagement.Services
             }
             drill.Name = dto.Name;
             drill.Diameter = dto.Diameter;
-            drill.Vc = dto.Vc;
-            drill.Fz = dto.Fz;
+            //drill.Vc = dto.Vc;
+            //drill.Fz = dto.Fz;
             _dbContext.SaveChanges();
         }
     }
