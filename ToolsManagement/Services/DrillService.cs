@@ -10,7 +10,7 @@ namespace ToolsManagement.Services
     public interface IDrillService
     {
         IEnumerable<DrillDto> GetAll();
-        int Create(CreateDrillDto dto);
+        int Create(CreateDrillDto dto, CreateDrillParametersDto createDrillParametersDto);
         DrillDto GetById(int id);
         void Delete(int id);
         void Update(int id, UpdateDrillDto dto);
@@ -33,19 +33,18 @@ namespace ToolsManagement.Services
                 .ToList();
             return drills;
         }
-        public int Create(CreateDrillDto dto)
+        public int Create(CreateDrillDto createDrillDto, CreateDrillParametersDto createDrillParametersDto)
         {
             var drill = new Drill()
             {
-                Name = dto.Name,
-                Diameter = dto.Diameter, 
-                //Fz = dto.Fz, 
-                //Vc = dto.Vc
+                Name = createDrillDto.Name,
+                Diameter = createDrillDto.Diameter,
+                DrillParameters = new List<DrillParameters>() { new DrillParameters() { Vc = createDrillParametersDto.Vc, Fz = createDrillParametersDto.Fz} },
             };
             _dbContext.Add(drill);
             _dbContext.SaveChanges();
             return drill.Id;
-        }
+        }   
         public DrillDto GetById(int id)
         {
             var drill = _dbContext

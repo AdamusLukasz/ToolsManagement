@@ -25,9 +25,9 @@ namespace ToolsManagement.Controllers
             return Ok(drills);
         }
         [HttpPost]
-        public ActionResult CreateDrill([FromBody] CreateDrillDto dto)
+        public ActionResult CreateDrill([FromBody] CreateDrillDto dto, CreateDrillParametersDto createDrillParametersDto)
         {
-            var id = _drillService.Create(dto);
+            var id = _drillService.Create(dto, createDrillParametersDto);
             return Created($"/api/drill/{id}", null);
         }
 

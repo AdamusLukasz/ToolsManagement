@@ -29,8 +29,8 @@ namespace ToolsManagement.Entities
             {
                 mb.Property(x => x.Name).HasMaxLength(40).IsRequired();
                 mb.Property(x => x.Diameter).HasMaxLength(40).IsRequired();
-                mb.Property(x => x.Vc).HasMaxLength(40).IsRequired();
-                mb.Property(x => x.Fz).HasMaxLength(40).IsRequired();
+                //mb.Property(x => x.Vc).HasMaxLength(40).IsRequired();
+                //mb.Property(x => x.Fz).HasMaxLength(40).IsRequired();
             });
         }
 
