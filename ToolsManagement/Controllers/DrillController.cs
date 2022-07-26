@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ToolsManagement.Entities;
 using ToolsManagement.Models;
+using ToolsManagement.Models.Drill;
 using ToolsManagement.Services;
 
 namespace ToolsManagement.Controllers
@@ -25,7 +26,8 @@ namespace ToolsManagement.Controllers
             return Ok(drills);
         }
         [HttpPost]
-        public ActionResult CreateDrill([FromBody] CreateDrillDto dto, CreateDrillParametersDto createDrillParametersDto)
+        //TODO: Pass only one parameter [FromBody] with data that is needed.
+        public ActionResult CreateDrill([FromBody] CreateDrillDto dto)
         {
             var id = _drillService.Create(dto, createDrillParametersDto);
             return Created($"/api/drill/{id}", null);

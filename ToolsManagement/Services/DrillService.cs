@@ -4,6 +4,7 @@ using System.Linq;
 using ToolsManagement.Entities;
 using ToolsManagement.Models;
 using ToolsManagement.Exceptions;
+using ToolsManagement.Models.Drill;
 
 namespace ToolsManagement.Services
 {
@@ -33,7 +34,7 @@ namespace ToolsManagement.Services
                 .ToList();
             return drills;
         }
-        public int Create(CreateDrillDto createDrillDto, CreateDrillParametersDto createDrillParametersDto)
+        public int Create(CreateDrillDto createDrillDto)
         {
             var drill = new Drill()
             {

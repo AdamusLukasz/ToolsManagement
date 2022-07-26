@@ -17,13 +17,13 @@ namespace ToolsManagement.Controllers
             _endMillCutterService = endMillCutterService;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<EndMillCutterDto>> GetAll()
+        public ActionResult<IEnumerable<EndMillCutterDto>> GetAllEndMillCutters()
         {
             var endMillCutter = _endMillCutterService.GetAll();
             return Ok(endMillCutter);
         }
         [HttpGet("{id}")]
-        public ActionResult<EndMillCutterDto> Get([FromRoute] int id)
+        public ActionResult<EndMillCutterDto> GetEndMillCutter([FromRoute] int id)
         {
             var endMillCutter = _endMillCutterService.GetById(id);
             return endMillCutter;
@@ -35,13 +35,13 @@ namespace ToolsManagement.Controllers
             return Created($"/api/endmillcutter/{id}", null);
         }
         [HttpDelete("{id}")]
-        public ActionResult Delete([FromRoute] int id)
+        public ActionResult DeleteEndMillCutter([FromRoute] int id)
         {
             _endMillCutterService.Delete(id);
             return NoContent();
         }
         [HttpPut("{id}")]
-        public ActionResult Update([FromBody] UpdateEndMillCutterDto dto, [FromRoute] int id)
+        public ActionResult UpdateEndMillCutter([FromBody] UpdateEndMillCutterDto dto, [FromRoute] int id)
         {
             _endMillCutterService.Update(id, dto);
             return Ok();

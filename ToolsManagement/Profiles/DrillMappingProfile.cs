@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using ToolsManagement.Entities;
-using ToolsManagement.Models;
+using ToolsManagement.Models.Drill;
 
-namespace ToolsManagement
+namespace ToolsManagement.Profiles
 {
     public class DrillMappingProfile : Profile
     {

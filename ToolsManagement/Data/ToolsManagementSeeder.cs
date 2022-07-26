@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace ToolsManagement
+namespace ToolsManagement.Data
 {
     public class ToolsManagementSeeder
     {

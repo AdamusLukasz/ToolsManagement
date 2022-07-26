@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ToolsManagement.Models;
+using ToolsManagement.Models.Drill;
 
 namespace ToolsManagement.Entities
 {
