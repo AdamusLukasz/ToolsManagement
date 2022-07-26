@@ -1,6 +1,6 @@
-﻿namespace ToolsManagement.Models
+﻿namespace ToolsManagement.Models.EndMillCutter
 {
-    public class UpdateEndMillCutterDto
+    public class CreateEndMillCutterDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 using System.Collections.Generic;
-using ToolsManagement.Models;
+using ToolsManagement.Models.EndMillCutter;
 using ToolsManagement.Services;
 
 namespace ToolsManagement.Controllers

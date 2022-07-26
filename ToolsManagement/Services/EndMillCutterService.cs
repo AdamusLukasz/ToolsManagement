@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ToolsManagement.Entities;
 using ToolsManagement.Exceptions;
-using ToolsManagement.Models;
+using ToolsManagement.Models.EndMillCutter;
 
 namespace ToolsManagement.Services
 {

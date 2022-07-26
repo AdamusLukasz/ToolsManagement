@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using ToolsManagement.Data;
 using ToolsManagement.Entities;
 using ToolsManagement.Services;
+using ToolsManagement.Services.Interfaces;
 
 namespace ToolsManagement
 {
@@ -41,6 +42,7 @@ namespace ToolsManagement
             services.AddScoped<ToolsManagementSeeder>();
             services.AddScoped<IDrillService, DrillService>();
             services.AddScoped<IEndMillCutterService, EndMillCutterService>();
+            services.AddScoped<IDrillParametersService, DrillParametersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -25,13 +25,11 @@ namespace ToolsManagement.Entities
             {
                 mb.HasMany(h => h.EndMillCutterParameters).WithOne(h => h.EndMillCutter).HasForeignKey(h => h.EndMillCutterId);
             });
-            modelBuilder.Entity<CreateDrillDto>(mb =>
-            {
-                mb.Property(x => x.Name).HasMaxLength(40).IsRequired();
-                mb.Property(x => x.Diameter).HasMaxLength(40).IsRequired();
-                //mb.Property(x => x.Vc).HasMaxLength(40).IsRequired();
-                //mb.Property(x => x.Fz).HasMaxLength(40).IsRequired();
-            });
+            //modelBuilder.Entity<CreateDrillDto>(mb =>
+            //{
+            //    mb.Property(x => x.Name).HasMaxLength(40).IsRequired();
+            //    mb.Property(x => x.Diameter).HasMaxLength(40).IsRequired();
+            //});
         }
 
 
