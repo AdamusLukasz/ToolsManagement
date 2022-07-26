@@ -29,7 +29,7 @@ namespace ToolsManagement.Controllers
         //TODO: Pass only one parameter [FromBody] with data that is needed.
         public ActionResult CreateDrill([FromBody] CreateDrillDto dto)
         {
-            var id = _drillService.Create(dto, createDrillParametersDto);
+            var id = _drillService.Create(dto);
             return Created($"/api/drill/{id}", null);
         }
 

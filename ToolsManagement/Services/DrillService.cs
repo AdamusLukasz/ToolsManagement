@@ -5,13 +5,14 @@ using ToolsManagement.Entities;
 using ToolsManagement.Models;
 using ToolsManagement.Exceptions;
 using ToolsManagement.Models.Drill;
+using Microsoft.EntityFrameworkCore;
 
 namespace ToolsManagement.Services
 {
     public interface IDrillService
     {
         IEnumerable<DrillDto> GetAll();
-        int Create(CreateDrillDto dto, CreateDrillParametersDto createDrillParametersDto);
+        int Create(CreateDrillDto dto);
         DrillDto GetById(int id);
         void Delete(int id);
         void Update(int id, UpdateDrillDto dto);
@@ -29,20 +30,42 @@ namespace ToolsManagement.Services
         {
             var drills = _dbContext
                 .Drills
-                .Select(x => new DrillDto()
-                { Id = x.Id, Name = x.Name, Diameter = x.Diameter, /*Vc = x.Vc, Fz = x.Fz*/})
+                .Include(x => x.DrillParameters)
                 .ToList();
-            return drills;
+
+            var drillDtos = new List<DrillDto>();
+
+            foreach (var drill in drills)
+            {
+                drillDtos.Add(new DrillDto() { 
+                    Id = drill.Id,
+                    Name = drill.Name,
+                    Diameter = drill.Diameter,
+                    // TODO: I recommenend to not include Fz and Vc as a properties of DrillDto. When you will have more than 1 DrillParameters, system will just take first (random?) parameters.
+                    Fz = drill.DrillParameters.Select(x => x.Fz).FirstOrDefault(),
+                    Vc = drill.DrillParameters.Select(x => x.Vc).FirstOrDefault(),
+                });
+            }
+
+            return drillDtos;
         }
         public int Create(CreateDrillDto createDrillDto)
         {
+            var drillParameters = new List<DrillParameters>();
+
+            foreach (var drillParameter in createDrillDto.DrillParameters)
+            {
+                drillParameters.Add(new DrillParameters() { Vc = drillParameter.Vc, Fz = drillParameter.Fz});
+            }
+
             var drill = new Drill()
             {
                 Name = createDrillDto.Name,
                 Diameter = createDrillDto.Diameter,
-                DrillParameters = new List<DrillParameters>() { new DrillParameters() { Vc = createDrillParametersDto.Vc, Fz = createDrillParametersDto.Fz} },
+                DrillParameters = drillParameters,
             };
-            _dbContext.Add(drill);
+
+            _dbContext.Drills.Add(drill);
             _dbContext.SaveChanges();
             return drill.Id;
         }   

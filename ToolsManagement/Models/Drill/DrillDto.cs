@@ -1,4 +1,4 @@
-﻿namespace ToolsManagement.Models
+﻿namespace ToolsManagement.Models.Drill
 {
     public class DrillDto
     {
