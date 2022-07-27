@@ -6,6 +6,7 @@ using ToolsManagement.Exceptions;
 using ToolsManagement.Models.Drill;
 using Microsoft.EntityFrameworkCore;
 using ToolsManagement.Services.Interfaces;
+using ToolsManagement.Data.Context;
 
 namespace ToolsManagement.Services
 {
@@ -21,27 +22,17 @@ namespace ToolsManagement.Services
         {
             var drills = _dbContext
                 .Drills
-                //.Select(x => new DrillDto()
-                //{
-                //    Name = x.Name,
-                //    Diameter = x.Diameter,
-                //    Length = x.Length
-                //})
                 .Include(x => x.DrillParameters)
-                .ToList();
-            var drillDtos = new List<DrillDto>();
-            foreach (var drill in drills)
-            {
-                drillDtos.Add(new DrillDto()
+                .Select(x => new DrillDto()
                 {
-                    Name = drill.Name,
-                    Diameter = drill.Diameter,
-                    // TODO: I recommenend to not include Fz and Vc as a properties of DrillDto. When you will have more than 1 DrillParameters, system will just take first (random?) parameters.
-                    //Fz = drill.DrillParameters.Select(x => x.Fz).FirstOrDefault(),
-                    //Vc = drill.DrillParameters.Select(x => x.Vc).FirstOrDefault(),
-                });
-            }
-            return drillDtos;
+                    Id = x.Id,
+                    Name = x.Name,
+                    Diameter = x.Diameter,
+                    Length = x.Length,
+                    DrillParameters = x.DrillParameters.Select(y => new DrillParametersDto() { Id = y.Id, Vc = y.Vc, Fz = y.Fz}).ToList(),
+                })
+                .ToList();
+            return drills;
         }
         public int CreateDrill(CreateDrillDto createDrillDto)
         {

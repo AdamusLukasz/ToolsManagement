@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ToolsManagement.Entities;
 using ToolsManagement.Models.Drill;
 
-namespace ToolsManagement.Entities
+namespace ToolsManagement.Data.Context
 {
     public class ToolsManagementDbContext : DbContext
     {
@@ -9,7 +10,7 @@ namespace ToolsManagement.Entities
         {
 
         }
-                                            
+
         public DbSet<Drill> Drills { get; set; }
         public DbSet<EndMillCutter> EndMillCutters { get; set; }
         public DbSet<DrillParameters> DrillParameters { get; set; }
