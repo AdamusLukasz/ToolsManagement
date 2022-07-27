@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using ToolsManagement.Entities;
-using ToolsManagement.Models;
-using ToolsManagement.Services;
+using ToolsManagement.Models.Drill;
+using ToolsManagement.Services.Interfaces;
 
 namespace ToolsManagement.Controllers
 {
-    [Route("api/drill")]
+    [Route("api/toolsmanagement")]
     [ApiController]
     public class DrillController : ControllerBase
     {
@@ -21,13 +21,13 @@ namespace ToolsManagement.Controllers
         public ActionResult<IEnumerable<DrillDto>> GetAll()
         {
             var drills = _drillService.GetAll();
-
             return Ok(drills);
         }
         [HttpPost]
-        public ActionResult CreateDrill([FromBody] CreateDrillDto dto, CreateDrillParametersDto createDrillParametersDto)
+        //TODO: Pass only one parameter [FromBody] with data that is needed.
+        public ActionResult CreateDrill([FromBody] CreateDrillDto dto)
         {
-            var id = _drillService.Create(dto, createDrillParametersDto);
+            var id = _drillService.CreateDrill(dto);
             return Created($"/api/drill/{id}", null);
         }
 

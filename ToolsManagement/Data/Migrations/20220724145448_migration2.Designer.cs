@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ToolsManagement.Entities;
+using ToolsManagement.Data.Context;
 
 namespace ToolsManagement.Migrations
 {
     [DbContext(typeof(ToolsManagementDbContext))]
-    partial class ToolsManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220724145448_migration2")]
+    partial class migration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,9 +86,6 @@ namespace ToolsManagement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EndMillCutterId")
-                        .HasColumnType("int");
-
                     b.Property<double>("Fz")
                         .HasColumnType("float");
 
@@ -100,8 +99,6 @@ namespace ToolsManagement.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EndMillCutterId");
 
                     b.ToTable("EndMillCutterParameters");
                 });
@@ -146,25 +143,9 @@ namespace ToolsManagement.Migrations
                     b.Navigation("Drill");
                 });
 
-            modelBuilder.Entity("ToolsManagement.Entities.EndMillCutterParameters", b =>
-                {
-                    b.HasOne("ToolsManagement.Entities.EndMillCutter", "EndMillCutter")
-                        .WithMany("EndMillCutterParameters")
-                        .HasForeignKey("EndMillCutterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EndMillCutter");
-                });
-
             modelBuilder.Entity("ToolsManagement.Entities.Drill", b =>
                 {
                     b.Navigation("DrillParameters");
-                });
-
-            modelBuilder.Entity("ToolsManagement.Entities.EndMillCutter", b =>
-                {
-                    b.Navigation("EndMillCutterParameters");
                 });
 #pragma warning restore 612, 618
         }
