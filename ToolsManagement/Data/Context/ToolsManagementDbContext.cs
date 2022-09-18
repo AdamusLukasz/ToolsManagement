@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ToolsManagement.Data.Entities;
 using ToolsManagement.Entities;
 using ToolsManagement.Models.Drill;
 
@@ -15,6 +16,8 @@ namespace ToolsManagement.Data.Context
         public DbSet<EndMillCutter> EndMillCutters { get; set; }
         public DbSet<DrillParameters> DrillParameters { get; set; }
         public DbSet<EndMillCutterParameters> EndMillCutterParameters { get; set; }
+        public DbSet<Material> Materials { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +28,10 @@ namespace ToolsManagement.Data.Context
             modelBuilder.Entity<EndMillCutter>(mb =>
             {
                 mb.HasMany(h => h.EndMillCutterParameters).WithOne(h => h.EndMillCutter).HasForeignKey(h => h.EndMillCutterId);
+            });
+            modelBuilder.Entity<Material>(mb =>
+            {
+                mb.Property(a => a.Name).IsRequired();
             });
         }
 
