@@ -4,6 +4,5 @@
     {
         public int Vc { get; set; }
         public double Fz { get; set; }
-        public int DrillId { get; set; }
     }
 }

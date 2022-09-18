@@ -13,7 +13,6 @@ namespace ToolsManagement.Services
     public class DrillService : IDrillService
     {
         private readonly ToolsManagementDbContext _dbContext;
-        //private readonly IMapper _mapper;
         public DrillService(ToolsManagementDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -36,15 +35,10 @@ namespace ToolsManagement.Services
         }
         public int CreateDrill(CreateDrillDto createDrillDto)
         {
-            //var drillParameters = new List<DrillParameters>();
-            //foreach (var drillParameter in createDrillDto.DrillParameters)
-            //{
-            //    drillParameters.Add(new DrillParameters() { Vc = drillParameter.Vc, Fz = drillParameter.Fz});
-            //}
             var drill = new Drill()
             {
                 Name = createDrillDto.Name,
-                Diameter = createDrillDto.Diameter,
+                Diameter = createDrillDto.Diameter, Length = createDrillDto.Length, DrillParameters = new List<DrillParameters>() { new DrillParameters { Vc = createDrillDto.Vc, Fz = createDrillDto.Fz} }
             };
             _dbContext.Drills.Add(drill);
             _dbContext.SaveChanges();
@@ -87,8 +81,6 @@ namespace ToolsManagement.Services
             }
             drill.Name = dto.Name;
             drill.Diameter = dto.Diameter;
-            //drill.Vc = dto.Vc;
-            //drill.Fz = dto.Fz;
             _dbContext.SaveChanges();
         }
     }
