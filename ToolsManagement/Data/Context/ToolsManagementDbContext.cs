@@ -32,6 +32,7 @@ namespace ToolsManagement.Data.Context
             modelBuilder.Entity<Material>(mb =>
             {
                 mb.Property(a => a.Name).IsRequired();
+                //mb.HasMany(a => a.DrillParameters).WithOne(m => m.Material).HasForeignKey(h => h.MaterialId);
             });
         }
 
