@@ -7,6 +7,6 @@ namespace ToolsManagement.Data.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        //public List<DrillParameters> DrillParameters { get; set; } = new();
+        public List<DrillParameters> DrillParameters { get; set; } = new();
     }
 }
