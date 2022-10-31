@@ -38,7 +38,9 @@ namespace ToolsManagement.Services
             var drill = new Drill()
             {
                 Name = createDrillDto.Name,
-                Diameter = createDrillDto.Diameter, Length = createDrillDto.Length, DrillParameters = new List<DrillParameters>() { new DrillParameters { Vc = createDrillDto.Vc, Fz = createDrillDto.Fz} }
+                Diameter = createDrillDto.Diameter,
+                Length = createDrillDto.Length,
+                DrillParameters = new List<DrillParameters>() { new DrillParameters { Vc = createDrillDto.Vc, Fz = createDrillDto.Fz } }
             };
             _dbContext.Drills.Add(drill);
             _dbContext.SaveChanges();

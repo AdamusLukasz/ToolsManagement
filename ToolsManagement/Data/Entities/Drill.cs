@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ToolsManagement.Data.Entities;
 
 namespace ToolsManagement.Entities
 {
@@ -8,7 +9,8 @@ namespace ToolsManagement.Entities
         public string Name { get; set; }
         public double Diameter { get; set; }
         public int Length { get; set; }
-        public List<DrillParameters> DrillParameters { get; set; } = new List<DrillParameters>();
+        public List<DrillParameters> DrillParameters { get; set; } = new();
+        public List<Material> Materials { get; set; } = new();
 
     }
 }

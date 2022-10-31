@@ -10,5 +10,6 @@ namespace ToolsManagement.Models.Drill
         public double Diameter { get; set; }
         public int Length { get; set; }
         public List<DrillParametersDto> DrillParameters { get; set; }
+        public List<MaterialDto> Materials { get; set; }
     }
 }
