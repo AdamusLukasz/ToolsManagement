@@ -24,14 +24,16 @@ namespace ToolsManagement.Services
                 Vc = dto.Vc,
                 Fz = dto.Fz 
             };
-            drillParameters.DrillId = drillId;
             _dbContext.DrillParameters.Add(drillParameters);
             _dbContext.SaveChanges();
             return drillParameters.Id;
         }
         private Drill GetDrillById(int drillId)
         {
-            var drill = _dbContext.Drills.Include(x => x.DrillParameters).FirstOrDefault(x => x.Id == drillId);
+            var drill = _dbContext.Drills
+                .Include(x => x.Materials)
+                .ThenInclude(x => x.DrillParameters)
+                .FirstOrDefault(x => x.Id == drillId);
             if (drill is null)
             {
                 throw new NotFoundException("Drill not found.");

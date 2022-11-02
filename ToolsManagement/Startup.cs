@@ -17,6 +17,7 @@ using ToolsManagement.Data;
 using ToolsManagement.Entities;
 using ToolsManagement.Services;
 using ToolsManagement.Services.Interfaces;
+using Newtonsoft.Json;
 
 namespace ToolsManagement
 {
@@ -34,6 +35,11 @@ namespace ToolsManagement
         {
 
             services.AddControllers();
+            services.AddMvc()
+                    .AddNewtonsoftJson(options =>
+                    {
+                        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ToolsManagement", Version = "v1" });

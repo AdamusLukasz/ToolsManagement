@@ -24,7 +24,6 @@ namespace ToolsManagement.Controllers
             return Ok(drills);
         }
         [HttpPost]
-        //TODO: Pass only one parameter [FromBody] with data that is needed.
         public ActionResult CreateDrill([FromBody] CreateDrillDto dto)
         {
             var id = _drillService.CreateDrill(dto);
@@ -32,7 +31,7 @@ namespace ToolsManagement.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<DrillDto> Get([FromRoute] int id)
+        public ActionResult<Drill> Get([FromRoute] int id)
         {
             var drill = _drillService.GetById(id);
             return drill;

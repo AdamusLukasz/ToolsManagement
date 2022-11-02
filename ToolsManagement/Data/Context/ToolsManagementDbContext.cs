@@ -23,19 +23,18 @@ namespace ToolsManagement.Data.Context
         {
             modelBuilder.Entity<Drill>(mb =>
             {
-                mb.HasMany(h => h.DrillParameters).WithOne(h => h.Drill).HasForeignKey(j => j.DrillId);
+                mb.HasMany(h => h.Materials).WithOne(h => h.Drill).HasForeignKey(h => h.DrillId);
             });
+
             modelBuilder.Entity<EndMillCutter>(mb =>
             {
                 mb.HasMany(h => h.EndMillCutterParameters).WithOne(h => h.EndMillCutter).HasForeignKey(h => h.EndMillCutterId);
             });
+
             modelBuilder.Entity<Material>(mb =>
             {
-                mb.Property(a => a.Name).IsRequired();
-                //mb.HasMany(a => a.DrillParameters).WithOne(m => m.Material).HasForeignKey(h => h.MaterialId);
+                mb.HasMany(h => h.DrillParameters).WithOne(h => h.Material).HasForeignKey(h => h.MaterialId);
             });
         }
-
-
     }
 }
