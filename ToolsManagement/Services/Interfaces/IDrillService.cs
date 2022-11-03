@@ -8,7 +8,7 @@ namespace ToolsManagement.Services.Interfaces
     {
         IEnumerable<DrillDto> GetAll();
         int CreateDrill(CreateDrillDto dto);
-        Drill GetById(int id);
+        DrillDto GetById(int id);
         void Delete(int id);
         void Update(int id, UpdateDrillDto dto);
     }

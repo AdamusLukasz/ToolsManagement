@@ -22,7 +22,6 @@ namespace ToolsManagement.Services
         {
             var drills = _dbContext
                 .Drills
-                .Include(a => a.Materials)
                 .Select(n => new DrillDto()
                 {
                     Id = n.Id,
@@ -45,12 +44,17 @@ namespace ToolsManagement.Services
             _dbContext.SaveChanges();
             return drill.Id;
         }   
-        public Drill GetById(int id)
+        public DrillDto GetById(int id)
         {
             var drill = _dbContext
                 .Drills
-                .Include(x => x.Materials)
-                .ThenInclude(y => y.DrillParameters)
+                .Select(n => new DrillDto()
+                { 
+                    Id = n.Id,
+                    Name = n.Name, 
+                    Length = n.Length, 
+                    Diameter = n.Diameter 
+                })
                 .FirstOrDefault(d => d.Id == id);
             if (drill is null)
             {

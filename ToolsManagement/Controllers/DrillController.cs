@@ -31,7 +31,7 @@ namespace ToolsManagement.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Drill> Get([FromRoute] int id)
+        public ActionResult<DrillDto> Get([FromRoute] int id)
         {
             var drill = _drillService.GetById(id);
             return drill;
