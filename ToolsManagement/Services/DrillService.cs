@@ -18,12 +18,17 @@ namespace ToolsManagement.Services
         {
             _dbContext = dbContext;
         }
-        public IEnumerable<Drill> GetAll()
+        public IEnumerable<DrillDto> GetAll()
         {
             var drills = _dbContext
                 .Drills
                 .Include(a => a.Materials)
-                .ThenInclude(y => y.DrillParameters)
+                .Select(n => new DrillDto()
+                {
+                    Name = n.Name,
+                    Length = n.Length,
+                    Diameter = n.Diameter
+                })
                 .ToList();
             return drills;
         }

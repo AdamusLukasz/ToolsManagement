@@ -6,7 +6,7 @@ namespace ToolsManagement.Services.Interfaces
 {
     public interface IDrillService
     {
-        IEnumerable<Drill> GetAll();
+        IEnumerable<DrillDto> GetAll();
         int CreateDrill(CreateDrillDto dto);
         Drill GetById(int id);
         void Delete(int id);
