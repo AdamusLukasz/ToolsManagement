@@ -7,6 +7,7 @@ using ToolsManagement.Models.Drill;
 using Microsoft.EntityFrameworkCore;
 using ToolsManagement.Services.Interfaces;
 using ToolsManagement.Data.Context;
+using ToolsManagement.Data.Entities;
 
 namespace ToolsManagement.Services
 {
@@ -21,14 +22,13 @@ namespace ToolsManagement.Services
         {
             var drills = _dbContext
                 .Drills
-                .Include(x => x.DrillParameters)
-                .Select(x => new DrillDto()
+                .Include(a => a.Materials)
+                .Select(n => new DrillDto()
                 {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Diameter = x.Diameter,
-                    Length = x.Length,
-                    DrillParameters = x.DrillParameters.Select(y => new DrillParametersDto() { Id = y.Id, Vc = y.Vc, Fz = y.Fz}).ToList(),
+                    Id = n.Id,
+                    Name = n.Name,
+                    Length = n.Length,
+                    Diameter = n.Diameter
                 })
                 .ToList();
             return drills;
@@ -38,19 +38,19 @@ namespace ToolsManagement.Services
             var drill = new Drill()
             {
                 Name = createDrillDto.Name,
-                Diameter = createDrillDto.Diameter, Length = createDrillDto.Length, DrillParameters = new List<DrillParameters>() { new DrillParameters { Vc = createDrillDto.Vc, Fz = createDrillDto.Fz} }
+                Diameter = createDrillDto.Diameter,
+                Length = createDrillDto.Length,
             };
             _dbContext.Drills.Add(drill);
             _dbContext.SaveChanges();
             return drill.Id;
         }   
-        public DrillDto GetById(int id)
+        public Drill GetById(int id)
         {
             var drill = _dbContext
                 .Drills
-                .Include(x => x.DrillParameters)
-                .Select(x => new DrillDto()
-                { Id = x.Id, Name = x.Name, Diameter = x.Diameter })
+                .Include(x => x.Materials)
+                .ThenInclude(y => y.DrillParameters)
                 .FirstOrDefault(d => d.Id == id);
             if (drill is null)
             {
