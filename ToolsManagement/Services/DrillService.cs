@@ -25,6 +25,7 @@ namespace ToolsManagement.Services
                 .Include(a => a.Materials)
                 .Select(n => new DrillDto()
                 {
+                    Id = n.Id,
                     Name = n.Name,
                     Length = n.Length,
                     Diameter = n.Diameter
