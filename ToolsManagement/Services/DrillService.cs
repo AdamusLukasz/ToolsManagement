@@ -85,6 +85,7 @@ namespace ToolsManagement.Services
             }
             drill.Name = dto.Name;
             drill.Diameter = dto.Diameter;
+            drill.Length = dto.Length;
             _dbContext.SaveChanges();
         }
     }
