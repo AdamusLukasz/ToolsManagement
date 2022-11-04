@@ -15,10 +15,10 @@ namespace ToolsManagement.Controllers
             _drillParametersService = drillParametersService;
         }
         [HttpPost]
-        public ActionResult Post([FromRoute] int drillId, [FromBody] CreateDrillParametersDto dto)
+        public ActionResult Post([FromRoute] int drillId, int materialId, [FromBody] CreateDrillParametersDto dto)
         {
-            var newDrillId = _drillParametersService.CreateDrillParameters(drillId, dto);
-            return Created($"api/toolsmanagement/{drillId}/drill/{newDrillId}", null);
+            var newDrillParameterslId = _drillParametersService.CreateDrillParameters(drillId, materialId, dto);
+            return Created($"api/drill/{drillId}/drill/{newDrillParameterslId}", null);
         }
     }
 }
