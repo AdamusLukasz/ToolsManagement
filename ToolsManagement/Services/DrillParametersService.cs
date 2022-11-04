@@ -16,14 +16,22 @@ namespace ToolsManagement.Services
         {
             _dbContext = dbContext;
         }
-        public int CreateDrillParameters(int drillId, CreateDrillParametersDto dto)
+        public int CreateDrillParameters(int drillId, int materialId, CreateDrillParametersDto dto)
         {
             var drill = GetDrillById(drillId);
+            var material = drill.Materials.FirstOrDefault(x => x.Id == materialId);
+
             var drillParameters = new DrillParameters() 
             { 
                 Vc = dto.Vc,
-                Fz = dto.Fz 
+                Fz = dto.Fz, 
+                MaterialId = materialId
             };
+
+            if (material is null)
+            {
+                throw new NotFoundException("This drill don't have that material.");
+            }
             _dbContext.DrillParameters.Add(drillParameters);
             _dbContext.SaveChanges();
             return drillParameters.Id;
@@ -31,8 +39,7 @@ namespace ToolsManagement.Services
         private Drill GetDrillById(int drillId)
         {
             var drill = _dbContext.Drills
-                .Include(x => x.Materials)
-                .ThenInclude(x => x.DrillParameters)
+                .Include(a => a.Materials)
                 .FirstOrDefault(x => x.Id == drillId);
             if (drill is null)
             {
