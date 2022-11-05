@@ -83,9 +83,24 @@ namespace ToolsManagement.Services
             {
                 throw new NotFoundException("Drill not found.");
             }
-            drill.Name = dto.Name;
-            drill.Diameter = dto.Diameter;
-            drill.Length = dto.Length;
+
+            var name = dto.Name;
+            var diameter = dto.Diameter;
+            var length = dto.Length;
+
+            if (name is not null)
+            {
+                drill.Name = dto.Name;
+            }
+            if (diameter != 0)
+            {
+                drill.Diameter = dto.Diameter;
+            }
+            if (length != 0)
+            {
+                drill.Length = dto.Length;
+            }
+            
             _dbContext.SaveChanges();
         }
     }
