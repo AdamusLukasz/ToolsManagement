@@ -5,7 +5,7 @@ using ToolsManagement.Services.Interfaces;
 namespace ToolsManagement.Controllers
 {
     [ApiController]
-    [Route("api/drill{drillId}/drillParameters")]
+    [Route("api/[controller]")]
     public class DrillParametersController : ControllerBase
     {
         private readonly IDrillParametersService _drillParametersService;
@@ -14,7 +14,7 @@ namespace ToolsManagement.Controllers
         {
             _drillParametersService = drillParametersService;
         }
-        [HttpPost]
+        [HttpPost("drill{drillId}/material{materialId}")]
         public ActionResult Post([FromRoute] int drillId, int materialId, [FromBody] CreateDrillParametersDto dto)
         {
             var newDrillParameterslId = _drillParametersService.CreateDrillParameters(drillId, materialId, dto);
