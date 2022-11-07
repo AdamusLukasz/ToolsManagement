@@ -5,8 +5,12 @@ namespace ToolsManagement.Models.Drill
 {
     public class CreateDrillDto
     {
-        public string Name { get; set; }
-        public double Diameter { get; set; }
-        public int Length { get; set; }
+        [Required]
+        [MaxLength(12)]
+        public string Name { get; set; } = string.Empty;
+        [Required]
+        public double? Diameter { get; set; } = null;
+        [Required]
+        public int? Length { get; set; } = null;
     }
 }

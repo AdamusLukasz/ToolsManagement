@@ -26,6 +26,10 @@ namespace ToolsManagement.Controllers
         [HttpPost]
         public ActionResult CreateDrill([FromBody] CreateDrillDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var id = _drillService.CreateDrill(dto);
             return Created($"/api/drill/{id}", null);
         }

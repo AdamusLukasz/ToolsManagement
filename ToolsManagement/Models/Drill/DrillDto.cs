@@ -7,7 +7,7 @@ namespace ToolsManagement.Models.Drill
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public double Diameter { get; set; }
-        public int Length { get; set; }
+        public double? Diameter { get; set; }
+        public int? Length { get; set; }
     }
 }
