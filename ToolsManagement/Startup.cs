@@ -50,6 +50,7 @@ namespace ToolsManagement
             services.AddScoped<IDrillService, DrillService>();
             services.AddScoped<IEndMillCutterService, EndMillCutterService>();
             services.AddScoped<IDrillParametersService, DrillParametersService>();
+            services.AddScoped<IMagazineService, MagazineService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
