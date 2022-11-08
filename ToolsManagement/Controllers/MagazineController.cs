@@ -34,5 +34,13 @@ namespace ToolsManagement.Controllers
             return Ok();
 
         }
+
+        [HttpPut("/take/{drillId}")]
+        public ActionResult TakeFromMagazine([FromRoute] int drillId)
+        {
+            _magazineService.TakeFromMagazine(drillId);
+            return Ok();
+
+        }
     }
 }

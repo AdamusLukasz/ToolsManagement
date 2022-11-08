@@ -7,5 +7,6 @@ namespace ToolsManagement.Services
     {
         IEnumerable<DrillDto> GetAll();
         void ReturnToMagazine(int drillId);
+        void TakeFromMagazine(int drillId);
     }
 }

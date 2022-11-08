@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ToolsManagement.Data.Context;
+using ToolsManagement.Exceptions;
 using ToolsManagement.Models.Drill;
 
 namespace ToolsManagement.Services
@@ -25,7 +26,8 @@ namespace ToolsManagement.Services
                     Name = n.Name,
                     //Length = n.Length,
                     //Diameter = n.Diameter,
-                    Quantity = n.Quantity
+                    Quantity = n.Quantity,
+                    QuantityInMagazine = n.QuantityInMagazine
                 })
                 .ToList();
             return drills;
@@ -37,9 +39,25 @@ namespace ToolsManagement.Services
                 .Drills
                 .FirstOrDefault(a => a.Id == drillId);
 
-            int quantity = drills.Quantity;
+            int quantityInMagazine = drills.QuantityInMagazine;
 
-            drills.Quantity = quantity + 1;
+            drills.QuantityInMagazine += 1;
+
+            _dbContext.SaveChanges();
+        }
+        public void TakeFromMagazine(int drillId)
+        {
+            var drills = _dbContext
+                .Drills
+                .Where(a => a.Id == drillId)
+                .First();
+
+            var magazine = drills.QuantityInMagazine -= 1;
+
+            if (magazine < 0)
+            {
+                throw new NotFoundException("Magazine is empty.");
+            }
 
             _dbContext.SaveChanges();
         }
