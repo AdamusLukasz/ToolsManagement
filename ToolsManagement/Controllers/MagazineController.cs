@@ -26,5 +26,13 @@ namespace ToolsManagement.Controllers
             var drills = _magazineService.GetAll();
             return Ok(drills);
         }
+
+        [HttpPut("{drillId}")]
+        public ActionResult Update([FromRoute] int drillId)
+        {
+            _magazineService.ReturnToMagazine(drillId);
+            return Ok();
+
+        }
     }
 }

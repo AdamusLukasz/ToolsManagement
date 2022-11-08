@@ -6,5 +6,6 @@ namespace ToolsManagement.Services
     public interface IMagazineService
     {
         IEnumerable<DrillDto> GetAll();
+        void ReturnToMagazine(int drillId);
     }
 }

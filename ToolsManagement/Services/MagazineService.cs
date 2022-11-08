@@ -30,5 +30,18 @@ namespace ToolsManagement.Services
                 .ToList();
             return drills;
         }
+
+        public void ReturnToMagazine(int drillId)
+        {
+            var drills = _dbContext
+                .Drills
+                .FirstOrDefault(a => a.Id == drillId);
+
+            int quantity = drills.Quantity;
+
+            drills.Quantity = quantity + 1;
+
+            _dbContext.SaveChanges();
+        }
     }
 }
