@@ -24,8 +24,6 @@ namespace ToolsManagement.Services
                 {
                     Id = n.Id,
                     Name = n.Name,
-                    //Length = n.Length,
-                    //Diameter = n.Diameter,
                     Quantity = n.Quantity, 
                     QuantityInMagazine = n.QuantityInMagazine
                 })
