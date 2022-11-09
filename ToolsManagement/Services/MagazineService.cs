@@ -38,6 +38,14 @@ namespace ToolsManagement.Services
                 .FirstOrDefault(a => a.Id == drillId);
 
             int quantityInMagazine = drills.QuantityInMagazine;
+
+            int quantity = drills.Quantity;
+
+            if (quantityInMagazine == quantity)
+            {
+                throw new NotFoundException("Magazine is full.");
+            }
+
             drills.QuantityInMagazine += 1;
 
             _dbContext.SaveChanges();
