@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ToolsManagement.Services.Interfaces;
 using ToolsManagement.Data.Context;
 using ToolsManagement.Data.Entities;
+using System;
 
 namespace ToolsManagement.Services
 {
@@ -41,6 +42,14 @@ namespace ToolsManagement.Services
                 Diameter = createDrillDto.Diameter,
                 Length = createDrillDto.Length,
             };
+
+            bool isDigit = drill.Name.Any(char.IsDigit);
+
+            if (isDigit)
+            {
+                throw new WrongValueException("You can't put any digits.");
+            }
+
             _dbContext.Drills.Add(drill);
             _dbContext.SaveChanges();
             return drill.Id;
