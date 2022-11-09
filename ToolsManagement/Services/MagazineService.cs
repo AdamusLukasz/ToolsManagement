@@ -26,7 +26,7 @@ namespace ToolsManagement.Services
                     Name = n.Name,
                     //Length = n.Length,
                     //Diameter = n.Diameter,
-                    Quantity = n.Quantity,
+                    Quantity = n.Quantity, 
                     QuantityInMagazine = n.QuantityInMagazine
                 })
                 .ToList();
@@ -40,7 +40,6 @@ namespace ToolsManagement.Services
                 .FirstOrDefault(a => a.Id == drillId);
 
             int quantityInMagazine = drills.QuantityInMagazine;
-
             drills.QuantityInMagazine += 1;
 
             _dbContext.SaveChanges();
@@ -59,6 +58,16 @@ namespace ToolsManagement.Services
                 throw new NotFoundException("Magazine is empty.");
             }
 
+            _dbContext.SaveChanges();
+        }
+
+        public void UpdateQuantityInMagazine(int drillId, DrillMagazineQuantityUpdateDto dto)
+        {
+            var drill = _dbContext
+                .Drills
+                .First(a => a.Id == drillId);
+
+            drill.Quantity = dto.Quantity;
             _dbContext.SaveChanges();
         }
     }

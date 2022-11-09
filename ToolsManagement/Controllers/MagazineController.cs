@@ -42,5 +42,12 @@ namespace ToolsManagement.Controllers
             return Ok();
 
         }
+
+        [HttpPut("api/updatemagazine/{drillId}")]
+        public ActionResult UpdateQuantityInMagazine([FromRoute] int drillId, [FromBody] DrillMagazineQuantityUpdateDto dto)
+        {
+            _magazineService.UpdateQuantityInMagazine(drillId, dto);
+            return Ok();
+        }
     }
 }
