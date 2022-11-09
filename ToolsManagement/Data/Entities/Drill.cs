@@ -9,6 +9,8 @@ namespace ToolsManagement.Entities
         public string Name { get; set; }
         public double? Diameter { get; set; }
         public int? Length { get; set; } = null;
+        public int Quantity { get; set; }
+        public int QuantityInMagazine { get; set; }
         public List<Material> Materials { get; set; } = new();
     }
 }
