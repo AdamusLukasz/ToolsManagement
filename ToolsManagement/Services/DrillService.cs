@@ -45,6 +45,16 @@ namespace ToolsManagement.Services
 
             bool isDigit = drill.Name.Any(char.IsDigit);
 
+            if (createDrillDto.Diameter <= 0 || createDrillDto.Diameter > 100)
+            {
+                throw new WrongValueException("You put diameter less than 0 or more than 100.");
+            }
+            if (createDrillDto.Length <= 0 || createDrillDto.Length > 500)
+
+            {
+                throw new WrongValueException("You put length less than 0 or more than 500.");
+            }
+
             if (isDigit)
             {
                 throw new WrongValueException("You can't put any digits.");
