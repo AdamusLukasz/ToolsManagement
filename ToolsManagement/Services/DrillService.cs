@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ToolsManagement.Services.Interfaces;
 using ToolsManagement.Data.Context;
 using ToolsManagement.Data.Entities;
+using System;
 
 namespace ToolsManagement.Services
 {
@@ -27,7 +28,7 @@ namespace ToolsManagement.Services
                     Id = n.Id,
                     Name = n.Name,
                     Length = n.Length,
-                    Diameter = n.Diameter,
+                    //Diameter = n.Diameter,
                     Quantity = n.Quantity
                 })
                 .ToList();
@@ -41,6 +42,29 @@ namespace ToolsManagement.Services
                 Diameter = createDrillDto.Diameter,
                 Length = createDrillDto.Length,
             };
+
+            bool isDigit = drill.Name.Any(char.IsDigit);
+
+            if (createDrillDto.Diameter <= 0 || createDrillDto.Diameter > 100)
+            {
+                throw new WrongValueException("You put diameter less than 0 or more than 100.");
+            }
+            if (createDrillDto.Length <= 0 || createDrillDto.Length > 500)
+
+            {
+                throw new WrongValueException("You put length less than 0 or more than 500.");
+            }
+
+            if (isDigit)
+            {
+                throw new WrongValueException("You can't put any digits.");
+            }
+
+            if (_dbContext.Drills.Any(d => d.Name == drill.Name))
+            {
+                throw new WrongValueException("Record exist.");
+
+            }
             _dbContext.Drills.Add(drill);
             _dbContext.SaveChanges();
             return drill.Id;
