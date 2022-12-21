@@ -28,7 +28,7 @@ namespace ToolsManagement.Services
                     Id = n.Id,
                     Name = n.Name,
                     Length = n.Length,
-                    Diameter = n.Diameter,
+                    //Diameter = n.Diameter,
                     Quantity = n.Quantity
                 })
                 .ToList();
@@ -50,6 +50,11 @@ namespace ToolsManagement.Services
                 throw new WrongValueException("You can't put any digits.");
             }
 
+            if (_dbContext.Drills.Any(d => d.Name == drill.Name))
+            {
+                throw new WrongValueException("Record exist.");
+
+            }
             _dbContext.Drills.Add(drill);
             _dbContext.SaveChanges();
             return drill.Id;
