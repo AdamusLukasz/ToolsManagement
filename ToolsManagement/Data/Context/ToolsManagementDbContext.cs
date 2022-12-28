@@ -48,6 +48,12 @@ namespace ToolsManagement.Data.Context
             modelBuilder.Entity<Role>(mb =>
             {
                 mb.Property(p => p.Name).IsRequired();
+                mb.HasData(
+                    new Role() { Id = 1, Name = "Admin" },
+                    new Role() { Id = 2, Name = "Operator" },
+                    new Role() { Id = 3, Name = "Programmer" },
+                    new Role() { Id = 4, Name = "Viewer" }
+                           );
             });
 
         }
