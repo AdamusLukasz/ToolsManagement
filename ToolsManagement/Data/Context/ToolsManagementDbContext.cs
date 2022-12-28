@@ -24,6 +24,7 @@ namespace ToolsManagement.Data.Context
             modelBuilder.Entity<Drill>(mb =>
             {
                 mb.HasMany(h => h.Materials).WithOne(h => h.Drill).HasForeignKey(h => h.DrillId);
+                mb.Property(p => p.Diameter).HasColumnType("decimal(4,1)");
             });
 
             modelBuilder.Entity<EndMillCutter>(mb =>

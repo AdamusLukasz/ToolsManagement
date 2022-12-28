@@ -28,7 +28,7 @@ namespace ToolsManagement.Services
                     Id = n.Id,
                     Name = n.Name,
                     Length = n.Length,
-                    //Diameter = n.Diameter,
+                    Diameter = n.Diameter,
                     Quantity = n.Quantity
                 })
                 .ToList();
