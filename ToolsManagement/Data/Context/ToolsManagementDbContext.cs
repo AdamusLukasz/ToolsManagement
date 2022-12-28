@@ -17,6 +17,8 @@ namespace ToolsManagement.Data.Context
         public DbSet<DrillParameters> DrillParameters { get; set; }
         public DbSet<EndMillCutterParameters> EndMillCutterParameters { get; set; }
         public DbSet<Material> Materials { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
         
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -36,6 +38,24 @@ namespace ToolsManagement.Data.Context
             {
                 mb.HasMany(h => h.DrillParameters).WithOne(h => h.Material).HasForeignKey(h => h.MaterialId);
             });
+
+            modelBuilder.Entity<User>(mb =>
+            {
+                mb.Property(p => p.FirstName).IsRequired();
+                mb.Property(p => p.LastName).IsRequired();
+            });
+
+            modelBuilder.Entity<Role>(mb =>
+            {
+                mb.Property(p => p.Name).IsRequired();
+                mb.HasData(
+                    new Role() { Id = 1, Name = "Admin" },
+                    new Role() { Id = 2, Name = "Operator" },
+                    new Role() { Id = 3, Name = "Programmer" },
+                    new Role() { Id = 4, Name = "Viewer" }
+                           );
+            });
+
         }
     }
 }
