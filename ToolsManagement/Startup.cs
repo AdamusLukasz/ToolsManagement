@@ -20,6 +20,10 @@ using ToolsManagement.Services.Interfaces;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Identity;
 using ToolsManagement.Data.Entities;
+using FluentValidation;
+using ToolsManagement.Models;
+using ToolsManagement.Models.Validators;
+using FluentValidation.AspNetCore;
 
 namespace ToolsManagement
 {
@@ -36,7 +40,7 @@ namespace ToolsManagement
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation();
             services.AddMvc()
                     .AddNewtonsoftJson(options =>
                     {
@@ -55,6 +59,7 @@ namespace ToolsManagement
             services.AddScoped<IMagazineService, MagazineService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+            services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
