@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,10 +18,12 @@ namespace ToolsManagement.Services
     public class AccountService : IAccountService
     {
         private readonly ToolsManagementDbContext _context;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
-        public AccountService(ToolsManagementDbContext context)
+        public AccountService(ToolsManagementDbContext context, IPasswordHasher<User> passwordHasher)
         {
             _context = context;
+            _passwordHasher = passwordHasher;
         }
         public void RegisterUser(RegisterUserDto dto)
         {
@@ -31,6 +34,9 @@ namespace ToolsManagement.Services
                 RoleId = dto.RoleId
             };
 
+            var hashedPassword = _passwordHasher.HashPassword(newUser, dto.Password);
+
+            newUser.PasswordHash = hashedPassword;
             _context.Users.Add(newUser);
             _context.SaveChanges();
         }
