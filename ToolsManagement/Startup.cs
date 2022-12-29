@@ -18,6 +18,8 @@ using ToolsManagement.Entities;
 using ToolsManagement.Services;
 using ToolsManagement.Services.Interfaces;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Identity;
+using ToolsManagement.Data.Entities;
 
 namespace ToolsManagement
 {
@@ -52,6 +54,7 @@ namespace ToolsManagement
             services.AddScoped<IDrillParametersService, DrillParametersService>();
             services.AddScoped<IMagazineService, MagazineService>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
