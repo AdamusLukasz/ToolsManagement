@@ -25,6 +25,7 @@ namespace ToolsManagement.Models.Validators
             RuleFor(p => p.Password).MaximumLength(6);
             RuleFor(p => p.ConfirmPassword).Equal(p => p.Password);
 
+            // TODO : Validations should be for FirstName+LastName not just one of them
             RuleFor(p => p.FirstName).Custom((value, context) =>
                 {
                     var userExist = dbContext.Users.Any(f => f.FirstName == value);
