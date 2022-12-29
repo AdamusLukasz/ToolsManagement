@@ -15,6 +15,7 @@ namespace ToolsManagement.Models
         public string LastName { get; set; }
         [MinLength(6)]
         public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
         public int RoleId { get; set; } = 4;
     }
 }
