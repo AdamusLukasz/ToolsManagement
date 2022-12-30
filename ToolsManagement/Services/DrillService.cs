@@ -57,7 +57,7 @@ namespace ToolsManagement.Services
 
             if (isDigit)
             {
-                throw new WrongValueException("You can't put any digits.");
+                throw new WrongValueException("You can't put any digits to tool name.");
             }
 
             if (_dbContext.Drills.Any(d => d.Name == drill.Name))
