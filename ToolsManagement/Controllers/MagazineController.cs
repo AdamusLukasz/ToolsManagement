@@ -27,7 +27,7 @@ namespace ToolsManagement.Controllers
             return Ok(drills);
         }
 
-        [HttpPut("{drillId}")]
+        [HttpPut("return/{drillId}")]
         public ActionResult Update([FromRoute] int drillId)
         {
             _magazineService.ReturnToMagazine(drillId);
@@ -35,7 +35,7 @@ namespace ToolsManagement.Controllers
 
         }
 
-        [HttpPut("/take/{drillId}")]
+        [HttpPut("take/{drillId}")]
         public ActionResult TakeFromMagazine([FromRoute] int drillId)
         {
             _magazineService.TakeFromMagazine(drillId);
@@ -43,7 +43,7 @@ namespace ToolsManagement.Controllers
 
         }
 
-        [HttpPut("api/updatemagazine/{drillId}")]
+        [HttpPut("updatemagazine/{drillId}")]
         public ActionResult UpdateQuantityInMagazine([FromRoute] int drillId, [FromBody] DrillMagazineQuantityUpdateDto dto)
         {
             _magazineService.UpdateQuantityInMagazine(drillId, dto);
