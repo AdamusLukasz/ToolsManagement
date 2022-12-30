@@ -18,6 +18,14 @@ using ToolsManagement.Entities;
 using ToolsManagement.Services;
 using ToolsManagement.Services.Interfaces;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Identity;
+using ToolsManagement.Data.Entities;
+using FluentValidation;
+using ToolsManagement.Models;
+using ToolsManagement.Models.Validators;
+using FluentValidation.AspNetCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ToolsManagement
 {
@@ -33,8 +41,28 @@ namespace ToolsManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var authenticationSettings = new AuthenticationSettings();
 
-            services.AddControllers();
+            Configuration.GetSection("Authentication").Bind(authenticationSettings);
+
+            services.AddSingleton(authenticationSettings);
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = "Bearer";
+                option.DefaultScheme = "Bearer";
+                option.DefaultChallengeScheme = "Bearer";
+            }).AddJwtBearer(cfg =>
+            {
+                cfg.RequireHttpsMetadata = false;
+                cfg.SaveToken = true;
+                cfg.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = authenticationSettings.JwtIssuer,
+                    ValidAudience = authenticationSettings.JwtIssuer,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey))
+                };
+            });
+            services.AddControllers().AddFluentValidation();
             services.AddMvc()
                     .AddNewtonsoftJson(options =>
                     {
@@ -51,6 +79,9 @@ namespace ToolsManagement
             services.AddScoped<IEndMillCutterService, EndMillCutterService>();
             services.AddScoped<IDrillParametersService, DrillParametersService>();
             services.AddScoped<IMagazineService, MagazineService>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+            services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +93,7 @@ namespace ToolsManagement
                 app.UseDeveloperExceptionPage();
                 
             }
+            app.UseAuthentication();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ToolsManagement v1"));
 
