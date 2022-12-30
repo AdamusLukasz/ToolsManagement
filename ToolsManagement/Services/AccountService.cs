@@ -38,7 +38,7 @@ namespace ToolsManagement.Services
         {
             var user = _context.Users
                 .Include(u => u.Role)
-                .FirstOrDefault(u => u.FirstName == dto.FirstName);
+                .FirstOrDefault(u => u.FirstAndLastName == dto.FirstAndLastName);
             if (user is null)
             {
                 throw new BadRequestException("Invalid username or password.");
@@ -53,7 +53,7 @@ namespace ToolsManagement.Services
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
+                new Claim(ClaimTypes.Name, $"{user.FirstAndLastName}"),
                 new Claim(ClaimTypes.Role, $"{user.Role.Name}"),
             };
 
@@ -79,6 +79,8 @@ namespace ToolsManagement.Services
                 LastName = dto.LastName,
                 RoleId = dto.RoleId
             };
+
+            newUser.FirstAndLastName = newUser.FirstName + " " + newUser.LastName;
 
             var hashedPassword = _passwordHasher.HashPassword(newUser, dto.Password);
 

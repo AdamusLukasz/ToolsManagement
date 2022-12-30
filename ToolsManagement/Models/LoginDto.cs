@@ -8,7 +8,7 @@ namespace ToolsManagement.Models
 {
     public class LoginDto
     {
-        public string FirstName { get; set; }
+        public string FirstAndLastName { get; set; }
         public string Password { get; set; }
     }
 }
