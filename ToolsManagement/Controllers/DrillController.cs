@@ -31,7 +31,7 @@ namespace ToolsManagement.Controllers
                 return BadRequest(ModelState);
             }
             var id = _drillService.CreateDrill(dto);
-            return Created($"/api/drill/{id}", null);
+            return Created($"/api/toolsmanagement/{id}", null);
         }
 
         [HttpGet("{id}")]
