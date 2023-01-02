@@ -93,6 +93,7 @@ namespace ToolsManagement.Services
         }
         public void Delete(int id)
         {
+            _logger.LogWarning($"Drill with id: {id} DELETE action invoked.");
             var drill = _dbContext
                 .Drills
                 .FirstOrDefault(d => d.Id == id);
