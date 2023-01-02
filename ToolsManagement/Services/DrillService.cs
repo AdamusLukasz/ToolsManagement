@@ -83,7 +83,7 @@ namespace ToolsManagement.Services
                 .FirstOrDefault(d => d.Id == id);
             if (drill is null)
             {
-                throw new NotFoundException("Drill not found.");
+                throw new DrillNotFoundException(id);
             }
             return drill;
         }
