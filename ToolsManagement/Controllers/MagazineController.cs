@@ -44,7 +44,7 @@ namespace ToolsManagement.Controllers
 
         }
         [Authorize(Roles = "Admin")]
-        [HttpPut("updatemagazine/{drillId}")]
+        [HttpPut("update/{drillId}")]
         public ActionResult UpdateQuantityInMagazine([FromRoute] int drillId, [FromBody] DrillMagazineQuantityUpdateDto dto)
         {
             _magazineService.UpdateQuantityInMagazine(drillId, dto);
