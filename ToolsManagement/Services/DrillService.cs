@@ -9,15 +9,19 @@ using ToolsManagement.Services.Interfaces;
 using ToolsManagement.Data.Context;
 using ToolsManagement.Data.Entities;
 using System;
+using Microsoft.Extensions.Logging;
 
 namespace ToolsManagement.Services
 {
     public class DrillService : IDrillService
     {
         private readonly ToolsManagementDbContext _dbContext;
-        public DrillService(ToolsManagementDbContext dbContext)
+        private readonly ILogger<DrillService> _logger;
+
+        public DrillService(ToolsManagementDbContext dbContext, ILogger<DrillService> logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
         }
         public IEnumerable<DrillDto> GetAll()
         {
@@ -89,6 +93,7 @@ namespace ToolsManagement.Services
         }
         public void Delete(int id)
         {
+            _logger.LogError($"Drill with id: {id} DELETE action invoked.");
             var drill = _dbContext
                 .Drills
                 .FirstOrDefault(d => d.Id == id);
