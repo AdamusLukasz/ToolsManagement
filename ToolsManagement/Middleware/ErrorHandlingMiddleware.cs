@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToolsManagement.Exceptions;
 
 namespace ToolsManagement.Middleware
 {
@@ -21,6 +22,11 @@ namespace ToolsManagement.Middleware
             try
             {
                 await next.Invoke(context);
+            }
+            catch (NotFoundException notFoundException)
+            {
+                context.Response.StatusCode = 404;
+                await context.Response.WriteAsync(notFoundException.Message);
             }
             catch (Exception exception)
             {
