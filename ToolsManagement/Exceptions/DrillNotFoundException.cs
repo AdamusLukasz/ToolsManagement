@@ -8,7 +8,7 @@ namespace ToolsManagement.Exceptions
 {
     public class DrillNotFoundException : NotFoundException
     {
-        public DrillNotFoundException(int id) : base($"Drill with {id} was NOT FOUND.")
+        public DrillNotFoundException(int id) : base($"Drill with ID {id} was NOT FOUND.")
         {
 
         }
