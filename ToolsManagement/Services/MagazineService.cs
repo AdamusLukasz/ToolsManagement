@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,12 @@ namespace ToolsManagement.Services
     public class MagazineService : IMagazineService
     {
         private readonly ToolsManagementDbContext _dbContext;
-        public MagazineService(ToolsManagementDbContext dbContext)
+        private readonly ILogger _logger;
+
+        public MagazineService(ToolsManagementDbContext dbContext, ILogger<MagazineService> logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
         }
         public IEnumerable<DrillDto> GetAll()
         {
@@ -56,6 +60,8 @@ namespace ToolsManagement.Services
                 .Drills
                 .Where(a => a.Id == drillId)
                 .First();
+            
+            _logger.LogInformation($"{drills.Name} was taken.");
 
             var magazine = drills.QuantityInMagazine -= 1;
 
