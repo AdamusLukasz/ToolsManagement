@@ -50,6 +50,8 @@ namespace ToolsManagement.Services
                 throw new NotFoundException("Magazine is full.");
             }
 
+            _logger.LogInformation($"{drills.Name} was return.");
+
             drills.QuantityInMagazine += 1;
 
             _dbContext.SaveChanges();
@@ -61,14 +63,14 @@ namespace ToolsManagement.Services
                 .Where(a => a.Id == drillId)
                 .First();
             
-            _logger.LogInformation($"{drills.Name} was taken.");
-
             var magazine = drills.QuantityInMagazine -= 1;
 
             if (magazine < 0)
             {
                 throw new NotFoundException("Magazine is empty.");
             }
+
+            _logger.LogInformation($"{drills.Name} was taken.");
 
             _dbContext.SaveChanges();
         }
