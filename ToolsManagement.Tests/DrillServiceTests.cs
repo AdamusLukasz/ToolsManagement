@@ -11,7 +11,7 @@ namespace ToolsManagement.Tests
     public class DrillServiceTests
     {
         [Fact]
-        public void CanInsertDrillIntoDatabase()
+        public void CreateDrill_AddNewDrillToDatabase_AddedDrillSucceeded()
         {
             //Arrange
             var builder = new DbContextOptionsBuilder<ToolsManagementDbContext>();
@@ -19,7 +19,8 @@ namespace ToolsManagement.Tests
 
             using (var context = new ToolsManagementDbContext(builder.Options))
             {
-                //context.Database.EnsureDeleted();
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
 
                 var drill = new Drill { Name = "iscar", Diameter = 10, Length = 15 };
 
@@ -32,7 +33,6 @@ namespace ToolsManagement.Tests
 
                 drill.Id.Should().NotBe(null);
             }
-
         }
     }
 }
