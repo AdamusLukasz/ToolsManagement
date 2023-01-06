@@ -1,4 +1,3 @@
-# ToolsManagement
+# About The Project
 
-This API allows for creating new tools with his specify parameters.
-API also allows to delete, update records.
+This API  project is for managing tools at company.
