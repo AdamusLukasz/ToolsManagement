@@ -10,6 +10,7 @@ using ToolsManagement.Data.Context;
 using ToolsManagement.Data.Entities;
 using System;
 using Microsoft.Extensions.Logging;
+using ToolsManagement.Models;
 
 namespace ToolsManagement.Services
 {
@@ -38,6 +39,46 @@ namespace ToolsManagement.Services
                 .ToList();
             return drills;
         }
+        public DrillDto GetById(int id)
+        {
+            var drill = _dbContext
+                .Drills
+                .Select(n => new DrillDto()
+                {
+                    Id = n.Id,
+                    Name = n.Name,
+                    Length = n.Length,
+                    Diameter = n.Diameter
+                })
+                .FirstOrDefault(d => d.Id == id);
+            if (drill is null)
+            {
+                throw new DrillNotFoundException(id);
+            }
+            return drill;
+        }
+
+        public IEnumerable<DrillDto> GetDrillForDeclaredDiameters(int minDiameter, int maxDiameter)
+        {
+            var drills = _dbContext
+                .Drills
+                .Where(d => d.Diameter >= minDiameter && d.Diameter <= maxDiameter)
+                .Select(n => new DrillDto()
+                {
+                    Id = n.Id,
+                    Name = n.Name,
+                    Length = n.Length,
+                    Diameter = n.Diameter,
+                })
+                .ToList();
+
+            if (minDiameter >= maxDiameter)
+            {
+                throw new WrongValueException("Min value of diameter is grater than max value.");
+            }
+            return drills;
+        }
+     
         public int CreateDrill(CreateDrillDto createDrillDto)
         {
             var drill = new Drill()
@@ -73,24 +114,6 @@ namespace ToolsManagement.Services
             _dbContext.SaveChanges();
             return drill.Id;
         }   
-        public DrillDto GetById(int id)
-        {
-            var drill = _dbContext
-                .Drills
-                .Select(n => new DrillDto()
-                { 
-                    Id = n.Id,
-                    Name = n.Name, 
-                    Length = n.Length, 
-                    Diameter = n.Diameter 
-                })
-                .FirstOrDefault(d => d.Id == id);
-            if (drill is null)
-            {
-                throw new DrillNotFoundException(id);
-            }
-            return drill;
-        }
         public void Delete(int id)
         {
             _logger.LogError($"Drill with id: {id} DELETE action invoked.");

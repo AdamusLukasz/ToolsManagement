@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using ToolsManagement.Entities;
 using ToolsManagement.Models.Drill;
+using ToolsManagement.Models;
 using ToolsManagement.Services.Interfaces;
 
 namespace ToolsManagement.Controllers
 {
-    [Route("api/toolsmanagement")]
+    [Route("api/toolsmanagement/")]
     [ApiController]
     public class DrillController : ControllerBase
     {
@@ -23,6 +24,21 @@ namespace ToolsManagement.Controllers
             var drills = _drillService.GetAll();
             return Ok(drills);
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<DrillDto> Get([FromRoute] int id)
+        {
+            var drill = _drillService.GetById(id);
+            return drill;
+        }
+
+        [HttpGet("getbydiameters")]
+        public ActionResult<IEnumerable<DrillDto>> GetByDeclaredDiameters([FromQuery]int minDiameter, int maxDiameter)
+        {
+            var drills = _drillService.GetDrillForDeclaredDiameters(minDiameter, maxDiameter);
+            return Ok(drills);
+        }
+
         [HttpPost]
         public ActionResult CreateDrill([FromBody] CreateDrillDto dto)
         {
@@ -34,12 +50,7 @@ namespace ToolsManagement.Controllers
             return Created($"/api/toolsmanagement/{id}", null);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<DrillDto> Get([FromRoute] int id)
-        {
-            var drill = _drillService.GetById(id);
-            return drill;
-        }
+
         [HttpDelete("{id}")]
         public ActionResult Delete([FromRoute] int id)
         {
