@@ -7,7 +7,7 @@ namespace ToolsManagement.Services.Interfaces
 {
     public interface IDrillService
     {
-        IEnumerable<DrillDto> GetAll();
+        PagedResult<DrillDto> GetAll(DrillQuery drillQuery);
         DrillDto GetById(int id);
         IEnumerable<DrillDto> GetDrillForDeclaredDiameters(int minDiameter, int maxDiameter);
         int CreateDrill(CreateDrillDto dto);

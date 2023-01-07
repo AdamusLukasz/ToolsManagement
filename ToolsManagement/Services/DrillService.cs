@@ -24,9 +24,9 @@ namespace ToolsManagement.Services
             _dbContext = dbContext;
             _logger = logger;
         }
-        public IEnumerable<DrillDto> GetAll()
+        public PagedResult<DrillDto> GetAll(DrillQuery query)
         {
-            var drills = _dbContext
+            var mapToDto = _dbContext
                 .Drills
                 .Select(n => new DrillDto()
                 {
@@ -35,9 +35,30 @@ namespace ToolsManagement.Services
                     Length = n.Length,
                     Diameter = n.Diameter,
                     Quantity = n.Quantity
-                })
+                });
+
+            var baseQuery = _dbContext
+                .Drills
+                .Where(q => query.SearchPhrase == null || (q.Name.ToLower().Contains(query.SearchPhrase.ToLower())))
+                .Select(n => new DrillDto()
+                {
+                    Id = n.Id,
+                    Name = n.Name,
+                    Length = n.Length,
+                    Diameter = n.Diameter,
+                    Quantity = n.Quantity
+                });
+
+            var drills = baseQuery
+                .Skip(query.PageSize * (query.PageNumber - 1))
+                .Take(query.PageSize)
                 .ToList();
-            return drills;
+
+            var totalItemsCount = baseQuery.Count();
+
+            var result = new PagedResult<DrillDto>(drills, totalItemsCount, query.PageSize, query.PageNumber);
+
+            return result;
         }
         public DrillDto GetById(int id)
         {
