@@ -19,9 +19,9 @@ namespace ToolsManagement.Controllers
             _drillService = drillService;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<DrillDto>> GetAll()
+        public ActionResult<IEnumerable<DrillDto>> GetAll([FromQuery] DrillQuery drillQuery)
         {
-            var drills = _drillService.GetAll();
+            var drills = _drillService.GetAll(drillQuery);
             return Ok(drills);
         }
 

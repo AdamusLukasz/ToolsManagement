@@ -24,10 +24,11 @@ namespace ToolsManagement.Services
             _dbContext = dbContext;
             _logger = logger;
         }
-        public IEnumerable<DrillDto> GetAll()
+        public IEnumerable<DrillDto> GetAll(DrillQuery query)
         {
             var drills = _dbContext
                 .Drills
+                .Where(q => query.SearchPhrase == null || (q.Name.ToLower().Contains(query.SearchPhrase.ToLower())))
                 .Select(n => new DrillDto()
                 {
                     Id = n.Id,
@@ -36,6 +37,8 @@ namespace ToolsManagement.Services
                     Diameter = n.Diameter,
                     Quantity = n.Quantity
                 })
+                .Skip(query.PageSize * (query.PageNumber - 1))
+                .Take(query.PageSize)
                 .ToList();
             return drills;
         }
