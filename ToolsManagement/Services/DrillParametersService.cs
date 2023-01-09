@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using ToolsManagement.Data.Context;
+using ToolsManagement.Data.Entities;
 using ToolsManagement.Entities;
 using ToolsManagement.Exceptions;
-using ToolsManagement.Models.Drill;
+using ToolsManagement.Models.DrillParameters;
 using ToolsManagement.Services.Interfaces;
 
 namespace ToolsManagement.Services

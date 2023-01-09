@@ -1,4 +1,4 @@
-﻿namespace ToolsManagement.Models.Drill
+﻿namespace ToolsManagement.Models.DrillParameters
 {
     public class CreateDrillParametersDto
     {

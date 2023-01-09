@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using ToolsManagement.Entities;
-using ToolsManagement.Models.Drill;
+using ToolsManagement.Data.Entities;
+using ToolsManagement.Models.DrillModel;
 
 namespace ToolsManagement.Profiles
 {

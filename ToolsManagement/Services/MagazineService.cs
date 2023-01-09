@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ToolsManagement.Data.Context;
 using ToolsManagement.Exceptions;
-using ToolsManagement.Models.Drill;
+using ToolsManagement.Models.DrillModel;
 
 namespace ToolsManagement.Services
 {

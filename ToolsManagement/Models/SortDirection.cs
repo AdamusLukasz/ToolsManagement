@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToolsManagement.Models.Drill
+namespace ToolsManagement.Models
 {
-    public class DrillMagazineQuantityUpdateDto
+    public enum SortDirection
     {
-        public int Quantity { get; set; }
+        ASC,
+        DESC
     }
 }

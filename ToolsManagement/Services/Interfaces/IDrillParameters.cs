@@ -1,4 +1,4 @@
-﻿using ToolsManagement.Models.Drill;
+﻿using ToolsManagement.Models.DrillParameters;
 
 namespace ToolsManagement.Services.Interfaces
 {

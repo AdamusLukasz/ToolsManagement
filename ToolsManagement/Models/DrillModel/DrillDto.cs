@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ToolsManagement.Entities;
 
-namespace ToolsManagement.Models.Drill
+namespace ToolsManagement.Models.DrillModel
 {
     public class DrillDto
     {

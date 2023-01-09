@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ToolsManagement.Entities;
 using ToolsManagement.Exceptions;
-using ToolsManagement.Models.Drill;
+using ToolsManagement.Models.DrillModel;
 using Microsoft.EntityFrameworkCore;
 using ToolsManagement.Services.Interfaces;
 using ToolsManagement.Data.Context;
@@ -11,6 +11,7 @@ using ToolsManagement.Data.Entities;
 using System;
 using Microsoft.Extensions.Logging;
 using ToolsManagement.Models;
+using System.Linq.Expressions;
 
 namespace ToolsManagement.Services
 {
@@ -26,17 +27,6 @@ namespace ToolsManagement.Services
         }
         public PagedResult<DrillDto> GetAll(DrillQuery query)
         {
-            var mapToDto = _dbContext
-                .Drills
-                .Select(n => new DrillDto()
-                {
-                    Id = n.Id,
-                    Name = n.Name,
-                    Length = n.Length,
-                    Diameter = n.Diameter,
-                    Quantity = n.Quantity
-                });
-
             var baseQuery = _dbContext
                 .Drills
                 .Where(q => query.SearchPhrase == null || (q.Name.ToLower().Contains(query.SearchPhrase.ToLower())))
@@ -48,6 +38,20 @@ namespace ToolsManagement.Services
                     Diameter = n.Diameter,
                     Quantity = n.Quantity
                 });
+
+            if (!string.IsNullOrEmpty(query.SortBy))
+            {
+                var columnsSelector = new Dictionary<string, Expression<Func<Drill, object>>>
+                {
+                    { nameof(Drill.Name), r => r.Name}
+                };
+
+                var selectedColumn = columnsSelector[query.SortBy];
+
+                baseQuery = query.SortDirection == SortDirection.ASC
+                    ? baseQuery.OrderBy(r => r.Name)
+                    : baseQuery.OrderByDescending(c => c.Name);
+            }
 
             var drills = baseQuery
                 .Skip(query.PageSize * (query.PageNumber - 1))
@@ -99,7 +103,7 @@ namespace ToolsManagement.Services
             }
             return drills;
         }
-     
+
         public int CreateDrill(CreateDrillDto createDrillDto)
         {
             var drill = new Drill()
@@ -134,7 +138,7 @@ namespace ToolsManagement.Services
             _dbContext.Drills.Add(drill);
             _dbContext.SaveChanges();
             return drill.Id;
-        }   
+        }
         public void Delete(int id)
         {
             _logger.LogError($"Drill with id: {id} DELETE action invoked.");
@@ -174,7 +178,7 @@ namespace ToolsManagement.Services
             {
                 drill.Length = dto.Length;
             }
-            
+
             _dbContext.SaveChanges();
         }
     }

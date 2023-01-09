@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ToolsManagement.Models.Drill;
+using ToolsManagement.Models.DrillParameters;
 using ToolsManagement.Services.Interfaces;
 
 namespace ToolsManagement.Controllers

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ToolsManagement.Models.Drill
+namespace ToolsManagement.Models.DrillModel
 {
     public class CreateDrillDto
     {
