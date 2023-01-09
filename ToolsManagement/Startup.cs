@@ -82,7 +82,12 @@ namespace ToolsManagement
             services.AddScoped<IMagazineService, MagazineService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
+            // Validator
+
             services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
+            services.AddScoped<IValidator<DrillQuery>, DrillQueryValidator>();
+            // Middleware
             services.AddScoped<ErrorHandlingMiddleware>();
         }
 
