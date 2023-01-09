@@ -87,6 +87,7 @@ namespace ToolsManagement
 
             services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
             services.AddScoped<IValidator<DrillQuery>, DrillQueryValidator>();
+
             // Middleware
             services.AddScoped<ErrorHandlingMiddleware>();
         }
