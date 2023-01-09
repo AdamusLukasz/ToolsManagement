@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ToolsManagement.Data.Entities;
 using ToolsManagement.Entities;
-using ToolsManagement.Models.Drill;
+using ToolsManagement.Models.DrillModel;
 
 namespace ToolsManagement.Data.Context
 {

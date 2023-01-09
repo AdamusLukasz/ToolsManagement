@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using ToolsManagement.Entities;
-using ToolsManagement.Models.Drill;
+using ToolsManagement.Models.DrillModel;
 using ToolsManagement.Models;
 using ToolsManagement.Services.Interfaces;
 

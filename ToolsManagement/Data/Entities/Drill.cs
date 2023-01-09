@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ToolsManagement.Data.Entities;
 
-namespace ToolsManagement.Entities
+namespace ToolsManagement.Data.Entities
 {
     public class Drill
     {

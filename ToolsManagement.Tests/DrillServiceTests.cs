@@ -1,8 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using ToolsManagement.Data.Context;
-using ToolsManagement.Entities;
-using ToolsManagement.Models.Drill;
+using ToolsManagement.Data.Entities;
 using Xunit;
 
 

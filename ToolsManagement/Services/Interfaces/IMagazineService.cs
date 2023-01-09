@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ToolsManagement.Models.Drill;
+using ToolsManagement.Models.DrillModel;
 
 namespace ToolsManagement.Services
 {
