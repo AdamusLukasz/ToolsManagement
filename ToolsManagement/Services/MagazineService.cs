@@ -20,14 +20,16 @@ namespace ToolsManagement.Services
             _dbContext = dbContext;
             _logger = logger;
         }
-        public IEnumerable<DrillDto> GetAll()
+        public IEnumerable<DrillMagazineDto> GetAll()
         {
             var drills = _dbContext
                 .Drills
-                .Select(n => new DrillDto()
+                .Select(n => new DrillMagazineDto()
                 {
                     Id = n.Id,
                     Name = n.Name,
+                    Diameter= n.Diameter,
+                    Length= n.Length,
                     Quantity = n.Quantity, 
                     QuantityInMagazine = n.QuantityInMagazine
                 })

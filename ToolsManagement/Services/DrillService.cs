@@ -12,6 +12,8 @@ using System;
 using Microsoft.Extensions.Logging;
 using ToolsManagement.Models;
 using System.Linq.Expressions;
+using ToolsManagement.Models.DrillParametersModels;
+using System.Threading.Tasks;
 
 namespace ToolsManagement.Services
 {
@@ -25,18 +27,17 @@ namespace ToolsManagement.Services
             _dbContext = dbContext;
             _logger = logger;
         }
-        public PagedResult<DrillDto> GetAll(DrillQuery query)
+        public PagedResult<DrillMagazineDto> GetPaginated(DrillQuery query)
         {
             var baseQuery = _dbContext
                 .Drills
                 .Where(q => query.SearchPhrase == null || (q.Name.ToLower().Contains(query.SearchPhrase.ToLower())))
-                .Select(n => new DrillDto()
+                .Select(n => new DrillMagazineDto()
                 {
                     Id = n.Id,
                     Name = n.Name,
                     Length = n.Length,
                     Diameter = n.Diameter,
-                    Quantity = n.Quantity
                 });
 
             if (!string.IsNullOrEmpty(query.SortBy))
@@ -60,15 +61,15 @@ namespace ToolsManagement.Services
 
             var totalItemsCount = baseQuery.Count();
 
-            var result = new PagedResult<DrillDto>(drills, totalItemsCount, query.PageSize, query.PageNumber);
+            var result = new PagedResult<DrillMagazineDto>(drills, totalItemsCount, query.PageSize, query.PageNumber);
 
             return result;
         }
-        public DrillDto GetById(int id)
+        public DrillMagazineDto GetById(int id)
         {
             var drill = _dbContext
                 .Drills
-                .Select(n => new DrillDto()
+                .Select(n => new DrillMagazineDto()
                 {
                     Id = n.Id,
                     Name = n.Name,
@@ -83,12 +84,12 @@ namespace ToolsManagement.Services
             return drill;
         }
 
-        public IEnumerable<DrillDto> GetDrillForDeclaredDiameters(int minDiameter, int maxDiameter)
+        public IEnumerable<DrillMagazineDto> GetDrillForDeclaredDiameters(int minDiameter, int maxDiameter)
         {
             var drills = _dbContext
                 .Drills
                 .Where(d => d.Diameter >= minDiameter && d.Diameter <= maxDiameter)
-                .Select(n => new DrillDto()
+                .Select(n => new DrillMagazineDto()
                 {
                     Id = n.Id,
                     Name = n.Name,
@@ -180,6 +181,16 @@ namespace ToolsManagement.Services
             }
 
             _dbContext.SaveChanges();
+        }
+
+        public async Task<IEnumerable<DrillDto>> GetAll()
+        {
+            var drill = await _dbContext.Drills
+                .Include(a => a.Materials)
+                .ThenInclude(b => b.DrillParameters)
+                .Select(a => DrillDto.ToDrillDTOMap(a))
+                .ToListAsync();
+            return drill;
         }
     }
 }

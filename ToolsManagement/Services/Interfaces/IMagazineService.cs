@@ -5,7 +5,7 @@ namespace ToolsManagement.Services
 {
     public interface IMagazineService
     {
-        IEnumerable<DrillDto> GetAll();
+        IEnumerable<DrillMagazineDto> GetAll();
         void ReturnToMagazine(int drillId);
         void TakeFromMagazine(int drillId);
         void UpdateQuantityInMagazine(int drillId, DrillMagazineQuantityUpdateDto dto);

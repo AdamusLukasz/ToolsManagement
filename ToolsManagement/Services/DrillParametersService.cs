@@ -4,7 +4,7 @@ using ToolsManagement.Data.Context;
 using ToolsManagement.Data.Entities;
 using ToolsManagement.Entities;
 using ToolsManagement.Exceptions;
-using ToolsManagement.Models.DrillParameters;
+using ToolsManagement.Models.DrillParametersModels;
 using ToolsManagement.Services.Interfaces;
 
 namespace ToolsManagement.Services

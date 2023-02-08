@@ -3,7 +3,7 @@ using ToolsManagement.Entities;
 
 namespace ToolsManagement.Models.DrillModel
 {
-    public class DrillDto
+    public class DrillMagazineDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
