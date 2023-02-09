@@ -9,10 +9,10 @@ namespace ToolsManagement.Services.Interfaces
 {
     public interface IDrillService
     {
-        PagedResult<DrillMagazineDto> GetPaginated(DrillQuery drillQuery);
+        PagedResult<DrillDto> GetPaginated(DrillQuery drillQuery);
         Task<IEnumerable<DrillDto>> GetAll();
-        DrillMagazineDto GetById(int id);
-        IEnumerable<DrillMagazineDto> GetDrillForDeclaredDiameters(int minDiameter, int maxDiameter);
+        DrillDto GetById(int id);
+        IEnumerable<DrillDto> GetDrillForDeclaredDiameters(int minDiameter, int maxDiameter);
         int CreateDrill(CreateDrillDto dto);
         void Delete(int id);
         void Update(int id, UpdateDrillDto dto);

@@ -24,15 +24,7 @@ namespace ToolsManagement.Services
         {
             var drills = _dbContext
                 .Drills
-                .Select(n => new DrillMagazineDto()
-                {
-                    Id = n.Id,
-                    Name = n.Name,
-                    Diameter= n.Diameter,
-                    Length= n.Length,
-                    Quantity = n.Quantity, 
-                    QuantityInMagazine = n.QuantityInMagazine
-                })
+                .Select(n => DrillMagazineDto.ToDrillMagazineDTOMap(n))
                 .ToList();
             return drills;
         }

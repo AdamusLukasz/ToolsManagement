@@ -22,7 +22,7 @@ namespace ToolsManagement.Controllers
         }
 
         [HttpGet("paginated")]
-        public ActionResult<PagedResult<DrillMagazineDto>> GetAll([FromQuery] DrillQuery drillQuery)
+        public ActionResult<PagedResult<DrillDto>> GetAll([FromQuery] DrillQuery drillQuery)
         {
             var drills = _drillService.GetPaginated(drillQuery);
             return Ok(drills);
@@ -36,14 +36,14 @@ namespace ToolsManagement.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<DrillMagazineDto> Get([FromRoute] int id)
+        public ActionResult<DrillDto> Get([FromRoute] int id)
         {
             var drill = _drillService.GetById(id);
             return drill;
         }
 
         [HttpGet("getbydiameters")]
-        public ActionResult<IEnumerable<DrillMagazineDto>> GetByDeclaredDiameters([FromQuery]int minDiameter, int maxDiameter)
+        public ActionResult<IEnumerable<DrillDto>> GetByDeclaredDiameters([FromQuery]int minDiameter, int maxDiameter)
         {
             var drills = _drillService.GetDrillForDeclaredDiameters(minDiameter, maxDiameter);
             return Ok(drills);
