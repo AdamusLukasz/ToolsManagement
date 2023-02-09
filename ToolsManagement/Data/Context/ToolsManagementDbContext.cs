@@ -25,18 +25,31 @@ namespace ToolsManagement.Data.Context
         {
             modelBuilder.Entity<Drill>(mb =>
             {
-                mb.HasMany(h => h.Materials).WithOne(h => h.Drill).HasForeignKey(h => h.DrillId);
-                mb.Property(p => p.Diameter).HasColumnType("decimal(4,1)");
+                mb.HasMany(h => h.Materials)
+                .WithOne(h => h.Drill)
+                .HasForeignKey(h => h.DrillId);
+                
+                mb.Property(p => p.Diameter)
+                .HasColumnType("decimal(4,1)");
+
+                mb.Property(p => p.Name).IsRequired();
             });
 
             modelBuilder.Entity<EndMillCutter>(mb =>
             {
-                mb.HasMany(h => h.EndMillCutterParameters).WithOne(h => h.EndMillCutter).HasForeignKey(h => h.EndMillCutterId);
+                mb.HasMany(h => h.EndMillCutterParameters)
+                .WithOne(h => h.EndMillCutter)
+                .HasForeignKey(h => h.EndMillCutterId);
+
+                mb.Property(p => p.Name)
+                .IsRequired();
             });
 
             modelBuilder.Entity<Material>(mb =>
             {
-                mb.HasMany(h => h.DrillParameters).WithOne(h => h.Material).HasForeignKey(h => h.MaterialId);
+                mb.HasMany(h => h.DrillParameters)
+                .WithOne(h => h.Material)
+                .HasForeignKey(h => h.MaterialId);
             });
 
             modelBuilder.Entity<User>(mb =>
