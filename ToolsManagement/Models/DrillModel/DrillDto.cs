@@ -1,11 +1,7 @@
-﻿using System.Net;
-using System;
-using ToolsManagement.Data.Entities;
-using ToolsManagement.Models;
+﻿using ToolsManagement.Data.Entities;
 using ToolsManagement.Models.DrillParametersModels;
 using ToolsManagement.Entities;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ToolsManagement.Models.DrillModel
 {
