@@ -1,7 +1,5 @@
-﻿using AutoMapper;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using ToolsManagement.Entities;
 using ToolsManagement.Exceptions;
 using ToolsManagement.Models.DrillModel;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +10,6 @@ using System;
 using Microsoft.Extensions.Logging;
 using ToolsManagement.Models;
 using System.Linq.Expressions;
-using ToolsManagement.Models.DrillParametersModels;
 using System.Threading.Tasks;
 
 namespace ToolsManagement.Services

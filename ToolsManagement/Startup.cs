@@ -27,6 +27,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ToolsManagement.Middleware;
+using ToolsManagement.Models.DrillModel;
 
 namespace ToolsManagement
 {

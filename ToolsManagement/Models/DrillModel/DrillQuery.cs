@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToolsManagement.Models
+namespace ToolsManagement.Models.DrillModel
 {
     public class DrillQuery
     {
