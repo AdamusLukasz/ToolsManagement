@@ -41,8 +41,7 @@ namespace ToolsManagement.Data.Context
                 .WithOne(h => h.EndMillCutter)
                 .HasForeignKey(h => h.EndMillCutterId);
 
-                mb.Property(p => p.Name)
-                .IsRequired();
+                mb.Property(p => p.Name).IsRequired();
             });
 
             modelBuilder.Entity<Material>(mb =>
@@ -50,6 +49,8 @@ namespace ToolsManagement.Data.Context
                 mb.HasMany(h => h.DrillParameters)
                 .WithOne(h => h.Material)
                 .HasForeignKey(h => h.MaterialId);
+
+                mb.Property(p => p.Name).IsRequired();
             });
 
             modelBuilder.Entity<User>(mb =>
