@@ -21,6 +21,7 @@ namespace ToolsManagement.Models.DrillModel
                 Id = drill.Id,
                 Name = drill.Name,
                 Diameter = drill.Diameter,
+                Length = drill.Length,
                 MaterialsDto = ToMaterialDTOMap(drill.Materials),
             };
         }
