@@ -4,7 +4,7 @@ using System.Linq;
 using ToolsManagement.Data.Context;
 using ToolsManagement.Entities;
 using ToolsManagement.Exceptions;
-using ToolsManagement.Models.EndMillCutter;
+using ToolsManagement.Models.EndMillCutterModels;
 
 namespace ToolsManagement.Services
 {
