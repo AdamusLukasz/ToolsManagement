@@ -27,6 +27,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ToolsManagement.Middleware;
+using ToolsManagement.Models.DrillModel;
 
 namespace ToolsManagement
 {
@@ -75,7 +76,6 @@ namespace ToolsManagement
             });
             services.AddDbContext<ToolsManagementDbContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("ToolsManagementDbConnection")));
-            services.AddScoped<ToolsManagementSeeder>();
             services.AddScoped<IDrillService, DrillService>();
             services.AddScoped<IEndMillCutterService, EndMillCutterService>();
             services.AddScoped<IDrillParametersService, DrillParametersService>();
@@ -93,9 +93,8 @@ namespace ToolsManagement
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ToolsManagementSeeder seeder)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            seeder.Seed();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

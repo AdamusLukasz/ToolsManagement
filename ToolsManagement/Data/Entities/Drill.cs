@@ -6,9 +6,9 @@ namespace ToolsManagement.Data.Entities
     public class Drill
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public double? Diameter { get; set; }
-        public int? Length { get; set; } = null;
+        public int Length { get; set; } = 0;
         public int Quantity { get; set; }
         public int QuantityInMagazine { get; set; }
         public List<Material> Materials { get; set; } = new();

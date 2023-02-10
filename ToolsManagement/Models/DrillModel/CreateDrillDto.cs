@@ -7,10 +7,10 @@ namespace ToolsManagement.Models.DrillModel
     {
         [Required]
         [MaxLength(12)]
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
         [Required]
-        public double? Diameter { get; set; } = null;
+        public double Diameter { get; set; }
         [Required]
-        public int? Length { get; set; } = null;
+        public int Length { get; set; }
     }
 }

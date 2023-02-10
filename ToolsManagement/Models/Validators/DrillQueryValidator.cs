@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ToolsManagement.Data.Entities;
+using ToolsManagement.Models.DrillModel;
 
 namespace ToolsManagement.Models.Validators
 {

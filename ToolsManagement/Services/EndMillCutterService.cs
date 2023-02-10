@@ -4,19 +4,11 @@ using System.Linq;
 using ToolsManagement.Data.Context;
 using ToolsManagement.Entities;
 using ToolsManagement.Exceptions;
-using ToolsManagement.Models.EndMillCutter;
+using ToolsManagement.Models.EndMillCutterModels;
+using ToolsManagement.Services.Interfaces;
 
 namespace ToolsManagement.Services
 {
-    public interface IEndMillCutterService
-    {
-        IEnumerable<EndMillCutterDto> GetAll();
-        EndMillCutterDto GetById(int id);
-
-        int Create(CreateEndMillCutterDto dto);
-        void Delete(int id);
-        void Update(int id, UpdateEndMillCutterDto dto);
-    }
     public class EndMillCutterService : IEndMillCutterService
     {
         private readonly ToolsManagementDbContext _dbcontext;

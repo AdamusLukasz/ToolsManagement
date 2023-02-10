@@ -5,6 +5,8 @@ using ToolsManagement.Entities;
 using ToolsManagement.Models.DrillModel;
 using ToolsManagement.Models;
 using ToolsManagement.Services.Interfaces;
+using ToolsManagement.Data.Entities;
+using System.Threading.Tasks;
 
 namespace ToolsManagement.Controllers
 {
@@ -18,10 +20,18 @@ namespace ToolsManagement.Controllers
         {
             _drillService = drillService;
         }
-        [HttpGet]
+
+        [HttpGet("paginated")]
         public ActionResult<PagedResult<DrillDto>> GetAll([FromQuery] DrillQuery drillQuery)
         {
-            var drills = _drillService.GetAll(drillQuery);
+            var drills = _drillService.GetPaginated(drillQuery);
+            return Ok(drills);
+        }
+
+        [HttpGet("Maps")]
+        public async Task<ActionResult<DrillDto>> GetAllAsync()
+        {
+            var drills = await _drillService.GetAll();
             return Ok(drills);
         }
 
@@ -50,20 +60,18 @@ namespace ToolsManagement.Controllers
             return Created($"/api/toolsmanagement/{id}", null);
         }
 
-
         [HttpDelete("{id}")]
         public ActionResult Delete([FromRoute] int id)
         {
             _drillService.Delete(id);
             return NoContent();
         }
+
         [HttpPut("{id}")]
         public ActionResult Update([FromBody] UpdateDrillDto dto, [FromRoute] int id)
         {
             _drillService.Update(id, dto);
             return Ok();
         }
-
-
     }
 }

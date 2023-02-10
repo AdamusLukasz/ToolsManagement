@@ -21,7 +21,7 @@ namespace ToolsManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<DrillDto>> GetAll()
+        public ActionResult<IEnumerable<DrillMagazineDto>> GetAll()
         {
             var drills = _magazineService.GetAll();
             return Ok(drills);
