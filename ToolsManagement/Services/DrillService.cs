@@ -28,14 +28,10 @@ namespace ToolsManagement.Services
         {
             var baseQuery = _dbContext
                 .Drills
+                .Include(a => a.Materials)
+                .ThenInclude(b => b.DrillParameters)
                 .Where(q => query.SearchPhrase == null || (q.Name.ToLower().Contains(query.SearchPhrase.ToLower())))
-                .Select(n => new DrillDto()
-                {
-                    Id = n.Id,
-                    Name = n.Name,
-                    Length = n.Length,
-                    Diameter = n.Diameter,
-                });
+                .Select(n => DrillDto.ToDrillDTOMap(n));
 
             if (!string.IsNullOrEmpty(query.SortBy))
             {
@@ -66,14 +62,12 @@ namespace ToolsManagement.Services
         {
             var drill = _dbContext
                 .Drills
-                .Select(n => new DrillDto()
-                {
-                    Id = n.Id,
-                    Name = n.Name,
-                    Length = n.Length,
-                    Diameter = n.Diameter
-                })
-                .FirstOrDefault(d => d.Id == id);
+                .Include(a => a.Materials)
+                .ThenInclude(b => b.DrillParameters)
+                .Select(n => DrillDto.ToDrillDTOMap(n))
+                .Where(a => a.Id == id)
+                .First();
+
             if (drill is null)
             {
                 throw new DrillNotFoundException(id);
@@ -86,13 +80,7 @@ namespace ToolsManagement.Services
             var drills = _dbContext
                 .Drills
                 .Where(d => d.Diameter >= minDiameter && d.Diameter <= maxDiameter)
-                .Select(n => new DrillDto()
-                {
-                    Id = n.Id,
-                    Name = n.Name,
-                    Length = n.Length,
-                    Diameter = n.Diameter,
-                })
+                .Select(n => DrillDto.ToDrillDTOMap(n))
                 .ToList();
 
             if (minDiameter >= maxDiameter)
@@ -182,7 +170,8 @@ namespace ToolsManagement.Services
 
         public async Task<IEnumerable<DrillDto>> GetAll()
         {
-            var drill = await _dbContext.Drills
+            var drill = await _dbContext
+                .Drills
                 .Include(a => a.Materials)
                 .ThenInclude(b => b.DrillParameters)
                 .Select(a => DrillDto.ToDrillDTOMap(a))
