@@ -2,6 +2,7 @@
 using ToolsManagement.Models.DrillParametersModels;
 using ToolsManagement.Entities;
 using System.Collections.Generic;
+using System;
 
 namespace ToolsManagement.Models.DrillModel
 {
@@ -12,6 +13,7 @@ namespace ToolsManagement.Models.DrillModel
         public double? Diameter { get; set; }
         public int Length { get; set; }
         public IEnumerable<MaterialDto> MaterialsDto { get; set; }
+        public DateTime CreatedDate { get; set; }
 
 
         public static DrillDto ToDrillDTOMap(Drill drill)
@@ -23,6 +25,7 @@ namespace ToolsManagement.Models.DrillModel
                 Diameter = drill.Diameter,
                 Length = drill.Length,
                 MaterialsDto = ToMaterialDTOMap(drill.Materials),
+                CreatedDate= drill.CreatedDate
             };
         }
 

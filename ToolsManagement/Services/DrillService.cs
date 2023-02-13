@@ -97,6 +97,7 @@ namespace ToolsManagement.Services
                 Name = createDrillDto.Name,
                 Diameter = createDrillDto.Diameter,
                 Length = createDrillDto.Length,
+                //CreatedDate = createDrillDto.CreatedDate,
             };
 
             bool isDigit = drill.Name.Any(char.IsDigit);

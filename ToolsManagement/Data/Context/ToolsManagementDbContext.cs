@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using System;
 using ToolsManagement.Data.Entities;
 using ToolsManagement.Entities;
 using ToolsManagement.Models.DrillModel;
@@ -33,6 +35,9 @@ namespace ToolsManagement.Data.Context
                 .HasColumnType("decimal(4,1)");
 
                 mb.Property(p => p.Name).IsRequired();
+
+                mb.Property(p => p.CreatedDate)
+                .HasColumnType("smalldatetime");
             });
 
             modelBuilder.Entity<EndMillCutter>(mb =>

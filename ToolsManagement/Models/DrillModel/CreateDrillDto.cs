@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ToolsManagement.Models.DrillModel
@@ -12,5 +13,6 @@ namespace ToolsManagement.Models.DrillModel
         public double Diameter { get; set; }
         [Required]
         public int Length { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }
