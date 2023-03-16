@@ -61,17 +61,17 @@ namespace ToolsManagement.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete([FromRoute] int id)
+        public async Task <ActionResult> Delete([FromRoute] int id)
         {
-            _drillService.Delete(id);
-            return NoContent();
+            var drill = await _drillService.DeleteAsync(id);
+            return Ok(id);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Update([FromBody] UpdateDrillDto dto, [FromRoute] int id)
+        public async Task<ActionResult> Update([FromBody] UpdateDrillDto dto, [FromRoute] int id)
         {
-            _drillService.Update(id, dto);
-            return Ok();
+            var drill = await _drillService.UpdateAsync(id, dto);
+            return Ok(id);
         }
     }
 }

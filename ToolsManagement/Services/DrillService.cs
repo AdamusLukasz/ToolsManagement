@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using ToolsManagement.Models;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ToolsManagement.Services
 {
@@ -126,24 +127,30 @@ namespace ToolsManagement.Services
 
             return drill.Id;
         }
-        public void Delete(int id)
+        public async Task<int> DeleteAsync(int id)
         {
             _logger.LogError($"Drill with id: {id} DELETE action invoked.");
-            var drill = _dbContext
+
+            var drill = await _dbContext
                 .Drills
-                .FirstOrDefault(d => d.Id == id);
+                .FirstOrDefaultAsync(d => d.Id == id);
+
             if (drill is null)
             {
                 throw new DrillNotFoundException(id);
             }
+
             _dbContext.Drills.Remove(drill);
             _dbContext.SaveChanges();
+
+            return drill.Id;
         }
-        public void Update(int id, UpdateDrillDto dto)
+        public async Task<int> UpdateAsync(int id, UpdateDrillDto dto)
         {
-            var drill = _dbContext
+            var drill = await _dbContext
                 .Drills
-                .FirstOrDefault(d => d.Id == id);
+                .FirstOrDefaultAsync(d => d.Id == id);
+
             if (drill is null)
             {
                 throw new NotFoundException("Drill not found.");
@@ -167,6 +174,8 @@ namespace ToolsManagement.Services
             }
 
             _dbContext.SaveChanges();
+
+            return drill.Id;
         }
 
         public async Task<IEnumerable<DrillDto>> GetAllAsync()
