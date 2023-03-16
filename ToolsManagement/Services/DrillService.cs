@@ -75,13 +75,13 @@ namespace ToolsManagement.Services
             return drill;
         }
 
-        public IEnumerable<DrillDto> GetDrillForDeclaredDiameters(int minDiameter, int maxDiameter)
+        public async Task<IEnumerable<DrillDto>> GetDrillForDeclaredDiametersAsync(int minDiameter, int maxDiameter)
         {
-            var drills = _dbContext
+            var drills = await _dbContext
                 .Drills
                 .Where(d => d.Diameter >= minDiameter && d.Diameter <= maxDiameter)
                 .Select(n => DrillDto.ToDrillDTOMap(n))
-                .ToList();
+                .ToListAsync();
 
             if (minDiameter >= maxDiameter)
             {

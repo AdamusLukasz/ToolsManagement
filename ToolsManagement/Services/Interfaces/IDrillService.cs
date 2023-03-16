@@ -12,7 +12,7 @@ namespace ToolsManagement.Services.Interfaces
         PagedResult<DrillDto> GetPaginated(DrillQuery drillQuery);
         Task<IEnumerable<DrillDto>> GetAllAsync();
         Task<DrillDto> GetByIdAsync(int id);
-        IEnumerable<DrillDto> GetDrillForDeclaredDiameters(int minDiameter, int maxDiameter);
+        Task<IEnumerable<DrillDto>> GetDrillForDeclaredDiametersAsync(int minDiameter, int maxDiameter);
         int CreateDrill(CreateDrillDto dto);
         void Delete(int id);
         void Update(int id, UpdateDrillDto dto);

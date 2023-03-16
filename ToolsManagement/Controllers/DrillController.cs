@@ -43,9 +43,9 @@ namespace ToolsManagement.Controllers
         }
 
         [HttpGet("getbydiameters")]
-        public ActionResult<IEnumerable<DrillDto>> GetByDeclaredDiameters([FromQuery]int minDiameter, int maxDiameter)
+        public async Task<ActionResult<IEnumerable<DrillDto>>> GetByDeclaredDiameters([FromQuery]int minDiameter, int maxDiameter)
         {
-            var drills = _drillService.GetDrillForDeclaredDiameters(minDiameter, maxDiameter);
+            var drills = await _drillService.GetDrillForDeclaredDiametersAsync(minDiameter, maxDiameter);
             return Ok(drills);
         }
 
