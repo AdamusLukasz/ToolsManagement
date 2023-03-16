@@ -13,7 +13,7 @@ namespace ToolsManagement.Services.Interfaces
         Task<IEnumerable<DrillDto>> GetAllAsync();
         Task<DrillDto> GetByIdAsync(int id);
         Task<IEnumerable<DrillDto>> GetDrillForDeclaredDiametersAsync(int minDiameter, int maxDiameter);
-        int CreateDrill(CreateDrillDto dto);
+        Task <int> CreateDrillAsync(CreateDrillDto dto);
         void Delete(int id);
         void Update(int id, UpdateDrillDto dto);
     }

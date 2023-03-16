@@ -90,14 +90,13 @@ namespace ToolsManagement.Services
             return drills;
         }
 
-        public int CreateDrill(CreateDrillDto createDrillDto)
+        public async Task<int> CreateDrillAsync(CreateDrillDto createDrillDto)
         {
             var drill = new Drill()
             {
                 Name = createDrillDto.Name,
                 Diameter = createDrillDto.Diameter,
                 Length = createDrillDto.Length,
-                //CreatedDate = createDrillDto.CreatedDate,
             };
 
             bool isDigit = drill.Name.Any(char.IsDigit);
@@ -122,8 +121,9 @@ namespace ToolsManagement.Services
                 throw new WrongValueException("Record exist.");
 
             }
-            _dbContext.Drills.Add(drill);
+            await _dbContext.Drills.AddAsync(drill);
             _dbContext.SaveChanges();
+
             return drill.Id;
         }
         public void Delete(int id)

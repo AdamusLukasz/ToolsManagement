@@ -56,7 +56,7 @@ namespace ToolsManagement.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var id = _drillService.CreateDrill(dto);
+            var id = _drillService.CreateDrillAsync(dto);
             return Created($"/api/toolsmanagement/{id}", null);
         }
 
